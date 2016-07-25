@@ -1,0 +1,6 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+blog_homepage:
+    path:     /
+    defaults: { _controller: BlogBundle:Default:index }
