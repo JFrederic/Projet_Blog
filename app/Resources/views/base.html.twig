@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-    <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('framework/font-awesome/css/font-awesome.css')}}">
     <link href='https://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('framework/style.css') }}"> {% endblock %}
@@ -13,54 +13,70 @@
 </head>
 
 <body>
-
-    {% block body %}
-
-    <nav class="navbar navbar-inverse navbar-fixed-top ">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Lebonzafer</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-
-                    <li><a href="#about">ACCUEIL</a></li>
-                    <li><a href="#contact">ARTICLE</a></li>
-                    <li><a href="#contact">CONNEXION</a></li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
-        </div>
-    </nav>
-
+<nav class="navbar navbar-inverse navbar">
     <div class="container">
-
-        <div class="starter-template">
-<<<<<<< HEAD
-            <h1 class="text-center">Le BLOG Reunionnais des Zaffer !!</h1>
-            <p class="lead">Nos derniers commentaires</p>
-=======
-            <h1>Bootstrap starter template</h1>
-            <p class="lead">Use this document as a way to quickly start any new project.
-                <br> All you get is this text and a mostly barebones HTML document.</p>
->>>>>>> 1ccf4f04fca72356709ad58285c706cd34a80715
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Lebonzafer</a>
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
+                <li><a href="#about">ACCUEIL</a></li>
+                <li><a href="#contact">ARTICLE</a></li>
+                <li><a href="#contact">CONNEXION</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div class="starter-template jumbotron">
+
+        <h1 class="text-center" >Le BLOG Reunionnais des Zaffer !!</h1>
+        <p class="lead text-center lead">Nos derniers commentaires</p>
 
     </div>
-    <!-- /.container -->
 
-    {% endblock %} 
+    <hr class="separateur">
+
+</div>
+<!-- /.container -->
+
+
+   {% block body %}
+
+    {% endblock %}
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center paragraphe">Le site des bonne zaffer </p>
+                <ul class="social text-center">
+                    <li><a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+                <p class="pull-right"><i class="fa fa-copyright" aria-hidden="true"> Copyright Le Collectif des Fourmiz 2016</i></p>
+    </div>
+</div>
     
+
     {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     {% endblock %}
-</body>
 
+</body>
 </html>
