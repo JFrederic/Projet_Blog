@@ -53,6 +53,12 @@ class User extends BaseUser
      * @ORM\Column(name="dateDeNaissance", type="date" , nullable=true)
      */
     private $dateDeNaissance;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="admin")
+     */
+    private $article;
+    
 
 
 

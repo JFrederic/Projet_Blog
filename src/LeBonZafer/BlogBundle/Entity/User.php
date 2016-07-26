@@ -53,6 +53,12 @@ class User extends BaseUser
      * @ORM\Column(name="dateDeNaissance", type="date" , nullable=true)
      */
     private $dateDeNaissance;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="admin")
+     */
+    private $article;
+    
 
 
 
@@ -191,5 +197,39 @@ class User extends BaseUser
     public function getDateDeNaissance()
     {
         return $this->dateDeNaissance;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Article $article
+     *
+     * @return User
+     */
+    public function addArticle(\LeBonZafer\BlogBundle\Entity\Article $article)
+    {
+        $this->article[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Article $article
+     */
+    public function removeArticle(\LeBonZafer\BlogBundle\Entity\Article $article)
+    {
+        $this->article->removeElement($article);
+    }
+
+    /**
+     * Get article
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticle()
+    {
+        return $this->article;
     }
 }

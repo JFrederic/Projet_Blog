@@ -43,11 +43,16 @@ class Article
     private $dateCreation;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="brouillon", type="text")
+     * @ORM\Column(name="brouillon", type="boolean")
      */
     private $brouillon;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="article")
+     */
+    private $admin;
 
 
     /**
@@ -155,5 +160,28 @@ class Article
     {
         return $this->brouillon;
     }
-}
 
+    /**
+     * Set admin
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\User $admin
+     *
+     * @return Article
+     */
+    public function setAdmin(\LeBonZafer\BlogBundle\Entity\User $admin = null)
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
+
+    /**
+     * Get admin
+     *
+     * @return \LeBonZafer\BlogBundle\Entity\User
+     */
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+}
