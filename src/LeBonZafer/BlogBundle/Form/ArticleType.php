@@ -23,7 +23,7 @@ class ArticleType extends AbstractType
             ->add('admin')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
