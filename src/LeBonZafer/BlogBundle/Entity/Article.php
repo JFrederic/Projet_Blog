@@ -53,6 +53,12 @@ class Article
      * @ORM\ManyToOne(targetEntity="User", inversedBy="article")
      */
     private $admin;
+    
+    
+    public function __construct()
+    {
+        return $this->dateCreation = new \DateTime("now");
+    }
 
 
     /**

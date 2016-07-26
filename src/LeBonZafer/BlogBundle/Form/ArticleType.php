@@ -19,7 +19,6 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('dateCreation', DatetimeType::class)
             ->add('brouillon', ChoiceType::class, array(
         'choices' => array(
           'Publier' => 0,
