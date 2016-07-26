@@ -1,0 +1,16 @@
+.navbar-inverse .navbar-brand {
+    color:white;
+    font-size: 25px;
+}
+
+
+.navbar-inverse .navbar-nav>li>a {
+
+    color:black;
+}
+
+
+.navbar-inverse {
+    background-color: #0088CC;
+    border-color: #6c6159;
+}
