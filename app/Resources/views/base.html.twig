@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
-        <link href='https://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('framework/style.css') }}">
-    {% endblock %}
+    <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
+    <link href='https://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('framework/style.css') }}"> {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
+
 <body>
 
-{% block body %}
+    {% block body %}
 
     <nav class="navbar navbar-inverse navbar-fixed-top ">
         <div class="container">
@@ -33,23 +34,33 @@
                     <li><a href="#contact">ARTICLE</a></li>
                     <li><a href="#contact">CONNEXION</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
+            <!--/.nav-collapse -->
         </div>
     </nav>
 
     <div class="container">
 
         <div class="starter-template">
+<<<<<<< HEAD
             <h1 class="text-center">Le BLOG Reunionnais des Zaffer !!</h1>
             <p class="lead">Nos derniers commentaires</p>
+=======
+            <h1>Bootstrap starter template</h1>
+            <p class="lead">Use this document as a way to quickly start any new project.
+                <br> All you get is this text and a mostly barebones HTML document.</p>
+>>>>>>> 1ccf4f04fca72356709ad58285c706cd34a80715
         </div>
 
-    </div><!-- /.container -->
+    </div>
+    <!-- /.container -->
 
-{% endblock %}
-{% block javascripts %}
+    {% endblock %} 
+    
+    {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-{% endblock %}
+    {% endblock %}
 </body>
+
 </html>
