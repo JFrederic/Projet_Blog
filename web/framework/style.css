@@ -1,5 +1,5 @@
 body {
-    margin-top: 10%;
+
 }
 
 
@@ -24,5 +24,5 @@ body {
 .nav>li>a {
     position: relative;
     display: block;
-    padding: 16px 120px;
+    padding: 16px 60px;
 }
