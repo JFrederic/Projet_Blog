@@ -22,3 +22,8 @@ article_delete:
     path:     /{id}/delete
     defaults: { _controller: "BlogBundle:Article:delete" }
     methods:  DELETE
+    
+article_brouillon:
+    path:     /brouillon
+    defaults: { _controller: "BlogBundle:Article:new"}
+    methods:  [GET, POST]

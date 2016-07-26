@@ -41,9 +41,18 @@ class ArticleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            if($form->get('save')->isClicked()){
+                $article->setBrouillon(0);
+            }
+            elseif($form->get('brouillon')->isClicked()){
+                $article->setBrouillon(1);
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
+            
 
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
