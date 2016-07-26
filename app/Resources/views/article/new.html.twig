@@ -5,7 +5,8 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+            {{ form_widget(form.imageFile) }}
+        <input type="submit" value="Publier" />
     {{ form_end(form) }}
 
     <ul>

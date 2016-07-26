@@ -26,7 +26,7 @@ class ArticleController extends Controller
 
         return $this->render('article/index.html.twig', array(
             'articles' => $articles,
-            
+
         ));
     }
 

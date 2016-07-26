@@ -18,6 +18,11 @@
                 <td>{{ article.description }}</td>
             </tr>
             <tr>
+                <th>Description</th>
+                <td><img src="/images/products/{{article.imageName}}" alt="" /></td>
+            </tr>
+
+            <tr>
                 <th>Datecreation</th>
                 <td>{% if article.dateCreation %}{{ article.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
