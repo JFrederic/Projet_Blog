@@ -5,7 +5,7 @@ security:
     role_hierarchy:
         ROLE_MEMBRE:      ROLE_USER
         ROLE_ADMIN:       ROLE_USER , ROLE_MEMBRE
-        
+
 
     providers:
         fos_userbundle:
@@ -29,4 +29,3 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/article/, role: ROLE_ADMIN }
-        

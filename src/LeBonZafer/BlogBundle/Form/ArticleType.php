@@ -32,7 +32,7 @@ class ArticleType extends AbstractType
             
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
