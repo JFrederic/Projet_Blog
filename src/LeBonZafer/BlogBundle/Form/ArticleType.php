@@ -5,7 +5,6 @@ namespace LeBonZafer\BlogBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -21,7 +20,6 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('dateCreation', DatetimeType::class)
             ->add('imageFile', VichImageType::class, array('label' => ' ', 'required' => false))
             ->add('save', SubmitType::class)
             ->add('brouillon', SubmitType::class)
