@@ -117,53 +117,27 @@
             <h3 class="deep-purple-text lighten-1">Nos derniers articles</h3>
 
             <div class="row">
+                
+                {% for article in articles %}
+
                 <div class="col s10 offset-s1 m4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ asset('framework/image/chat.jpg') }}">
-                            <span class="card-title deep-purple lighten-1">Le chat botté a perdu sa gamelle</span>
+                            <img src="/images/products/{{ article.imageName }}">
+                            <span class="card-title deep-purple lighten-1">{{ article.titre }}</span>
                         </div>
                         <div class="card-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam minus fugit consequatur hic libero saepe earum dolore, deleniti voluptatibus optio magnam ipsum error nemo nulla. Consectetur est officia expedita quos.</p>
+                            <p>{{ article.description[:20]}}</p>
                         </div>
                         <div class="card-action">
                             <a href="#" class="deep-purple-text lighten-1">Lire l'article</a>
                         </div>
                     </div>
                 </div>
-
-
-
-                <div class="col s10 offset-s1 m4">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('framework/image/chat.jpg') }}">
-                            <span class="card-title deep-purple lighten-1">Le chat botté a perdu sa gamelle</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam minus fugit consequatur hic libero saepe earum dolore, deleniti voluptatibus optio magnam ipsum error nemo nulla. Consectetur est officia expedita quos.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="deep-purple-text lighten-1">Lire l'article</a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col s10 offset-s1 m4">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('framework/image/chat.jpg') }}">
-                            <span class="card-title deep-purple lighten-1">Le chat botté a perdu sa gamelle</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam minus fugit consequatur hic libero saepe earum dolore, deleniti voluptatibus optio magnam ipsum error nemo nulla. Consectetur est officia expedita quos.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="deep-purple-text lighten-1">Lire l'article</a>
-                        </div>
-                    </div>
-                </div>
+                
+                {% endfor %}
+                
+                
             </div>
         </div>
 
@@ -194,10 +168,9 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">
-                <p class="white-text"> © 2016 Copyright Le Collectif des Fourmiz</p>
+            
+                <p class="white-text right-align"> © 2016 Copyright Le Collectif des Fourmiz</p>
 
-            </div>
         </div>
     </footer>
 

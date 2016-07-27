@@ -13,6 +13,10 @@ html{
     flex: 1 0 auto;
   }
 
+nav{
+    box-shadow: -2px 5px 24px 0px rgba(0,0,0,0.75);
+}
+
 
 
 h1, h2, h3{
@@ -35,15 +39,10 @@ nav a{
 }
 
 footer{
-    font-family: 'Play', cursive; 
-/*
-    position : absolute;
-    bottom :0;
-    left : 0;
-    right : 0;
-*/
-   
+    font-family: 'Play', cursive;
+      box-shadow: -2px -5px 24px 0px rgba(0,0,0,0.75);
 }
+
 footer a {
     color : white; 
 }
@@ -52,6 +51,15 @@ footer a {
     padding : 2px;
     text-align: center; 
     width :100%; 
+}
+
+table i{
+    margin-right : 20px; 
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
 }
 
 
