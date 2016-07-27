@@ -7,7 +7,7 @@
         {% block title %}Welcome!{% endblock %}
     </title>
     {% block stylesheets %}
-    <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('framework/font-awesome/css/font-awesome.css')}}">
     <link href='https://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('framework/style.css') }}"> {% endblock %}
@@ -71,25 +71,86 @@
 
     </nav>
 
-    {% block body %}
+
+
+    <hr class="separateur">
+
+
+<!-- /.container -->
+
+
+   {% block body %}
+       <div class="container">
+
+           <div class="starter-template">
+
+               <h1 class="text-center">Le BLOG Reunionnais des Zaffer !!</h1>
+               <p class="lead">Nos derniers commentaires</p>
+
+           </div>
+       </div>
+
+
+
+                    <!-- /.container -->
+
+       <div class = "row">
+
+           <div class = "col-sm-4 col-md-3 col-sm-offset-2">
+               <a href = "#" class = "thumbnail">
+                   <img src = "{{ asset('framework/image/chat.jpg') }}" alt = "Generic placeholder thumbnail">
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur culpa, eaque facilis ipsum, libero, natus nisi numquam perferendis quisquam ratione
+                       reprehenderit tempora voluptates? Ea eos ipsam laboriosam natus officiis quos.</p>
+               </a>
+           </div>
+
+
+           <div class = "col-sm-4 col-md-3">
+               <a href = "#" class = "thumbnail">
+                   <img src = "{{ asset('framework/image/chat.jpg') }}" alt = "Generic placeholder thumbnail">
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at atque beatae dolorem eum id in ipsa molestias, nesciunt obcaecati praesentium, repellat repellendus,
+                       reprehenderit. Pariatur perferendis quibusdam ratione ullam voluptate.</p>
+               </a>
+           </div>
+
+           <div class = "col-sm-4 col-md-3">
+               <a href = "#" class = "thumbnail">
+                   <img src = "{{ asset('framework/image/chat.jpg') }}" alt = "Generic placeholder thumbnail">
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque libero minima molestiae obcaecati recusandae repellendus ullam vitae. Architecto asperiores, at, eaque eos fugiat id
+                       ipsum libero neque optio saepe tempora!</p>
+               </a>
+           </div>
+
+       </div>
+
+
+    {% endblock %}
+
+<div id="footer">
     <div class="container">
-
-        <div class="starter-template">
-
-            <h1 class="text-center">Le BLOG Reunionnais des Zaffer !!</h1>
-            <p class="lead">Nos derniers commentaires</p>
-
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center paragraphe">Le site des bonne zaffer </p>
+                <ul class="social text-center">
+                    <li><a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
         </div>
-
+                <p class="pull-right"><i class="fa fa-copyright" aria-hidden="true"> Copyright Le Collectif des Fourmiz 2016</i></p>
     </div>
-    <!-- /.container -->
+</div>
 
 
-    {% endblock %} {% block javascripts %}
+    {% block javascripts %}
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     {% endblock %}
-</body>
 
+
+</body>
 </html>
+>>>>>>> 854a85b14afa57af3c8a8cd6465b9cf18cd92283
