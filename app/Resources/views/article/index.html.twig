@@ -1,41 +1,43 @@
 {% extends 'base.html.twig' %} {% block body %}
-<h1>Article list</h1>
+
+<div class="container">
+<h1>Mes articles</h1>
 
 <table>
     <thead>
         <tr>
-            <th>Id</th>
             <th>Titre</th>
-            <th>Description</th>
-            <th>Datecreation</th>
+            <th>Date de création</th>
             <th>Statut</th>
             <th>Actions</th>
         </tr>
     </thead>
+
     <tbody>
         {% for article in articles %}
         <tr>
-            <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
+
             <td>{{ article.titre }}</td>
-            <td>{{ article.description }}</td>
+
             <td>{% if article.dateCreation %}{{ article.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>
-                <div class="btn-group btn-toggle" data-toggle="buttons">
-                    <label class="btn {% if article.brouillon == 0 %}btn-primary{% endif %}">
-                        <input type="radio" name="options" value="option1" disabled> Publié
-                    </label>
-                    <label class="btn {% if article.brouillon == 1 %}btn-primary{% endif %}">
-                        <input type="radio" name="options" value="option2" disabled> Brouillon
+                <div class="switch">
+                    <label>
+                        Brouillon
+                        <input type="checkbox" id="mycheckbox" {% if article.brouillon==0 %}checked{% endif %}>
+                        <span class="lever"></span> Publié
                     </label>
                 </div>
             </td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('article_show', { 'id': article.id }) }}">show</a>
+                        <a href="{{ path('article_show', { 'id': article.id }) }}" class="green-text"><i class="fa fa-eye" aria-hidden="true"></i>
+</a>
                     </li>
                     <li>
-                        <a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>
+                        <a href="{{ path('article_edit', { 'id': article.id }) }}" class="blue-text"><i class="fa fa-pencil" aria-hidden="true"></i>
+</a>
                     </li>
                 </ul>
             </td>
@@ -43,6 +45,9 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
+
+
 
 <ul>
     <li>
