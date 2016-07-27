@@ -1,4 +1,10 @@
 services:
-#    blog.example:
-#        class: LeBonZafer\BlogBundle\Example
+#    meeteo_meeteo.example:
+#        class: Meeteo\MeeteoBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+
+    user.registration_listener:
+       class: LeBonZafer\BlogBundle\EventListener\RegistrationListener
+       arguments: ['@router']
+       tags:
+           - { name: kernel.event_subscriber }

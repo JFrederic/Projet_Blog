@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-   
+
 
 <head>
     <meta charset="UTF-8" />
@@ -63,8 +63,8 @@
                     <li>
                         <a href="/login">Connexion</a>
                     </li>
-                    {% else %} {% if is_granted('ROLE_ADMIN') %}
-
+                    {% else %}
+                    {% if is_granted('ROLE_ADMIN') %}
                     <!-- Dropdown Trigger -->
                     <li> Administration
                         <ul>
@@ -75,11 +75,15 @@
                             <!--  <li><a href="#!">Commentaires</a></li>-->
                             <li><a href="/logout">Déconnexion</a></li>
                         </ul>
-
-
                     </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_MEMBRE') %}
+                    <li>
+                    <a href="/logout">Déconnexion</a>
+                    </li>
+                    {% endif %}
 
-                    {% endif %} {% endif %}
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -206,4 +210,3 @@
 </body>
 
 </html>
-
