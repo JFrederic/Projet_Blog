@@ -1,1 +1,119 @@
+html{
+    height: 100%
+}
+
+
+ body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+
+
+h1, h2, h3{
+    font-family: 'Quicksand', cursive;
+}
+
+nav a{
+    font-family: 'Play', cursive;
+    
+}
+
+.description{
+    margin-top : 50px; 
+}
+
+.brand-logo.titre {
+    color:white;
+    font-family: 'Irish Grover';
+    font-size: 42px;
+}
+
+footer{
+    font-family: 'Play', cursive; 
+/*
+    position : absolute;
+    bottom :0;
+    left : 0;
+    right : 0;
+*/
+   
+}
+footer a {
+    color : white; 
+}
+
+.card .card-image .card-title{
+    padding : 2px;
+    text-align: center; 
+    width :100%; 
+}
+
+
+
+
+.starter-template {
+    -webkit-box-shadow: 6px 6px 26px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 6px 26px -4px rgba(0,0,0,0.75);
+    box-shadow: 6px 6px 26px -4px rgba(0,0,0,0.75);
+    margin-top: 55px;
+}
+
+.separateur {
+    border: black 1px solid;
+    opacity: 0.2;
+    width : 70%; 
+}
+
+.social  {
+
+    list-style-type: none;
+}
+
+.social li {
+    display: inline;
+    color:black;
+    font-size: 15px;
+    margin-right: 35px;
+}
+
+.social li a {
+    color: white;
+    font-size: 20px;
+}
+
+.social p{
+  color: white;
+}
+
+
+
+
+
+
+/************************************************/
+
+
+
+/* Set the fixed height of the footer here */
+
+#footer {
+    height: 100%;
+    background-color: #2196F3;
+
+    -webkit-box-shadow: 3px -3px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px -3px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 3px -3px 5px -1px rgba(0,0,0,0.75);
+}
+
+.paragraphe {
+    margin-top: 20px;
+    color: white;
+}
+
 

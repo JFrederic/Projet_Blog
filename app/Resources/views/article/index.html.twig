@@ -1,1 +1,58 @@
+{% extends 'base.html.twig' %} {% block body %}
+
+<div class="container">
+<h1>Mes articles</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Date de création</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for article in articles %}
+        <tr>
+
+            <td>{{ article.titre }}</td>
+
+            <td>{% if article.dateCreation %}{{ article.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <div class="switch">
+                    <label>
+                        Brouillon
+                        <input type="checkbox" id="mycheckbox" {% if article.brouillon==0 %}checked{% endif %}>
+                        <span class="lever"></span> Publié
+                    </label>
+                </div>
+            </td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('article_show', { 'id': article.id }) }}" class="green-text"><i class="fa fa-eye" aria-hidden="true"></i>
+</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('article_edit', { 'id': article.id }) }}" class="blue-text"><i class="fa fa-pencil" aria-hidden="true"></i>
+</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+
+<ul>
+    <li>
+        <a href="{{ path('article_new') }}">Create a new entry</a>
+    </li>
+</ul>
+{% endblock %}
 
