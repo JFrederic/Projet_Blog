@@ -135,6 +135,4 @@ class ArticleController extends Controller
             ->getForm()
         ;
     }
-
-  
 }
