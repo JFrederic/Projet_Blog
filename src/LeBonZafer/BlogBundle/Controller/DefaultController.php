@@ -6,8 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+     public function listAction()
     {
-        return $this->render('BlogBundle:Default:index.html.twig');
+
+          $em = $this->getDoctrine()->getManager();
+          $articles = $em->getRepository('BlogBundle:Article')->findByBrouillon(0);
+
+
+        return $this->render('BlogBundle:Default:index.html.twig' , array(
+            'articles' => $articles,
+        ));
     }
 }
