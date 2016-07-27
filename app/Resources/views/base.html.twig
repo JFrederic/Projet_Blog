@@ -45,46 +45,47 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/">Accueil</a></li>
                     <!--                <li><a href="badges.html">Articles</a></li>-->
-                    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <li>
-                        <a href="/login">Connexion</a>
-                    </li>
-                    {% else %} {% if is_granted('ROLE_ADMIN') %}
-
+                    {% if  is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_ADMIN')  %}
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Administration<i class="material-icons right">arrow_drop_down</i></a></li>
 
-                    {% endif %} {% endif %}
+                    {% else %}
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_MEMBRE')  %}
+                    <li><a href="/logout">Déconnexion</a></li>
+
+
+                    {% else %}
+                    <li><a href="/login">Connexion</a></li>
+                    {% endif %}
+                    {% endif %}
                 </ul>
+
+                {% if is_granted('ROLE_ADMIN') %}
                 <ul class="side-nav" id="mobile-demo">
                     <li><a href="/">Accueil</a></li>
-                    <!--                <li><a href="badges.html">Articles</a></li>-->
-                    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <li>
-                        <a href="/login">Connexion</a>
-                    </li>
-                    {% else %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <!-- Dropdown Trigger -->
                     <li> Administration
                         <ul>
                             <li><a href="/article">Mes articles</a></li>
                             <li class="divider"></li>
                             <li><a href="/profile">Profil</a></li>
                             <li class="divider"></li>
-                            <!--  <li><a href="#!">Commentaires</a></li>-->
                             <li><a href="/logout">Déconnexion</a></li>
                         </ul>
                     </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_MEMBRE') %}
-                    <li>
-                    <a href="/logout">Déconnexion</a>
-                    </li>
-                    {% endif %}
-
-                    {% endif %}
                 </ul>
+              {% endif %}
+              {% if is_granted('ROLE_MEMBRE') %}
+                <ul class="side-nav" id="mobile-demo">
+                  <li><a href="/">Accueil</a></li>
+                  <li><a href="/logout">Déconnexion</a></li>
+                </ul>
+              {% endif %}
+
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/login">Connexion</a></li>
+              </ul>
+
             </div>
         </nav>
     </header>
@@ -121,53 +122,28 @@
             <h3 class="deep-purple-text lighten-1">Nos derniers articles</h3>
 
             <div class="row">
+
+              {% for article in articles %}
+
                 <div class="col s10 offset-s1 m4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ asset('framework/image/chat.jpg') }}">
-                            <span class="card-title deep-purple lighten-1">Le chat botté a perdu sa gamelle</span>
+                            <img src="/images/products/{{article.imageName}}">
+                            <span class="card-title deep-purple lighten-1">{{article.titre}}</span>
                         </div>
                         <div class="card-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam minus fugit consequatur hic libero saepe earum dolore, deleniti voluptatibus optio magnam ipsum error nemo nulla. Consectetur est officia expedita quos.</p>
+                            <p>{{article.description}}</p>
                         </div>
                         <div class="card-action">
-                            <a href="#" class="deep-purple-text lighten-1">Lire l'article</a>
+                            <a href="/" class="deep-purple-text lighten-1">Lire l'article</a>
                         </div>
                     </div>
                 </div>
 
 
-
-                <div class="col s10 offset-s1 m4">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('framework/image/chat.jpg') }}">
-                            <span class="card-title deep-purple lighten-1">Le chat botté a perdu sa gamelle</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam minus fugit consequatur hic libero saepe earum dolore, deleniti voluptatibus optio magnam ipsum error nemo nulla. Consectetur est officia expedita quos.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="deep-purple-text lighten-1">Lire l'article</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
 
 
-                <div class="col s10 offset-s1 m4">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('framework/image/chat.jpg') }}">
-                            <span class="card-title deep-purple lighten-1">Le chat botté a perdu sa gamelle</span>
-                        </div>
-                        <div class="card-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam minus fugit consequatur hic libero saepe earum dolore, deleniti voluptatibus optio magnam ipsum error nemo nulla. Consectetur est officia expedita quos.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="deep-purple-text lighten-1">Lire l'article</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
