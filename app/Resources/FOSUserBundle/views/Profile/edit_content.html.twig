@@ -1,50 +1,30 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 
-<section id="formulaire">
 
-  <div class="container">
+<div class="container">
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
     <div class="row">
-      <div class="col s8 offset-s2">
+        <div class="col s8 offset-s2">
 
-      {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+            {{ form_row(form.username) }} {{ form_row(form.email) }} {{ form_row(form.nom) }} {{ form_row(form.prenom) }} {{ form_row(form.telephone) }} {{ form_widget(form.imageFile) }}
 
-      <div class="row">
-        <div class="input-field col s12">
-        {{ form_label(form.username) }}
-        {{ form_widget(form.username, {'attr': {'class':'validate'}}) }}
-        {{ form_errors(form.username) }}
-      </div>
+
+
+
+        </div>
     </div>
-
     <div class="row">
-      <div class="input-field col s12">
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email, {'attr': {'class':'validate'}}) }}
-        {{ form_errors(form.email) }}
-      </div>
+        <div class="col s8 offset-s2">
+
+            {{ form_row(form.current_password) }}
+        </div>
     </div>
 
-
-    <div class="row">
-      <div class="input-field col s12">
-        {{ form_label(form.current_password) }}
-        {{ form_widget(form.current_password, {'attr': {'class':'validatevalidate'}}) }}
-        {{ form_errors(form.current_password) }}
-      </div>
-    </div>
-
-     {{ form_widget(form.imageFile) }}
-
-      <div>
-        <input type="submit" class="btn btn-success" value="{{ 'profile.edit.submit'|trans }}" />
-        <a class="btn btn-success" href="/profile">Annuler</a>
-      </div>
-      {{ form_end(form) }}
-
-
+    <div class="row center-align">
+        <input class="waves-effect waves-light btn deep-purple lighten-1" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        <a href="/profile" class="waves-effect waves-light btn red lighten-1">Retour</a>
 
     </div>
-  </div>
+    {{ form_end(form) }}
 </div>
-</section>

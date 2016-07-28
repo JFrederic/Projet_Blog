@@ -8,10 +8,8 @@ services:
         class: LeBonZafer\BlogBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
-
-
 services:
-    app.form.profile:
+     app.form.profile:
         class: LeBonZafer\BlogBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: app_user_profile }

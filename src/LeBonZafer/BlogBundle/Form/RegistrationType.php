@@ -7,12 +7,16 @@ namespace LeBonZafer\BlogBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('imageFile', VichImageType::class, array('label' => 'Avatar', 'required' => false));
+        $builder->add('nom')
+                ->add('prenom')
+                ->add('telephone')
+                ->add('imageFile', VichImageType::class, array('label' => ' ', 'required' => false));
     }
 
     public function getParent()

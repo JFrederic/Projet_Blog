@@ -1,21 +1,52 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Article edit</h1>
+   
+   <div class="container">
+    <h1 class="deep-purple-text lighten-1 center-align">Modifier l'article</h1>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+      <div class="row">
+                <div class="input-field col s12">
+                    {{ form_label(edit_form.titre) }} {{ form_widget(edit_form.titre) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_label(edit_form.description, 'Contenu') }} {{ form_widget(edit_form.description) }}
+                </div>
+            </div>
+       
+         <div class="row">
+                <div class="file-field input-field col s6">
+                    <div class="btn-floating btn-flat waves-effect waves-light tooltipped green" type="submit" data-position="left" data-delay="50" data-tooltip="Changer d'image">
+                        <i class="fa fa-file-image-o"></i> {{ form_widget(edit_form.imageFile) }}
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(edit_form.save, {'label':'Publier' , 'attr': {'class':'waves-effect waves-light btn-flat blue lighten-1 white-text'}}) }} {{ form_widget(edit_form.brouillon, {'label':'Enregistrer comme brouillon' , 'attr': {'class':'waves-effect waves-light btn-flat orange darken-1 lighten-1 white-text'}}) }}
+                </div>
+        </div>
+        
     {{ form_end(edit_form) }}
+    
+    {{ form_start(delete_form) }}
+                <input type="submit" class="waves-effect waves-light btn-flat red white-text" value="Supprimer l'article">
+    {{ form_end(delete_form) }}
+    
+
 
     <ul>
         <li>
             <a href="{{ path('article_index') }}">Back to the list</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+       
     </ul>
+    
+    </div>
 {% endblock %}

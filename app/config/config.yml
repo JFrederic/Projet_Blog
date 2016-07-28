@@ -40,7 +40,7 @@ fos_user:
         form:
             type: LeBonZafer\BlogBundle\Form\RegistrationType
     profile:
-      form:
+        form:
             type: LeBonZafer\BlogBundle\Form\ProfileType
 
 
@@ -59,7 +59,7 @@ vich_uploader:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    
+
 
 # Doctrine Configuration
 doctrine:
