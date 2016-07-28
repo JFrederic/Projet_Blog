@@ -88,11 +88,20 @@ class ArticleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+             if($editForm->get('save')->isClicked()){
+                $article->setBrouillon(0);
+                $article->setDateCreation(new \DateTime("now"));
+            }
+            elseif($editForm->get('brouillon')->isClicked()){
+                $article->setBrouillon(1);
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
+            return $this->redirectToRoute('article_index', array('id' => $article->getId()));
         }
 
         return $this->render('article/edit.html.twig', array(

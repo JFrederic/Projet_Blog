@@ -39,6 +39,9 @@ fos_user:
     registration:
         form:
             type: LeBonZafer\BlogBundle\Form\RegistrationType
+    profile:
+        form:
+            type: LeBonZafer\BlogBundle\Form\ProfileType
 
 
 vich_uploader:

@@ -77,6 +77,8 @@ class User extends BaseUser
      * @ORM\Column(name="imageName", type="string", length=255, nullable=true)
      */
     private $imageName;
+    
+   
 
 
 

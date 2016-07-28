@@ -21,6 +21,7 @@
 
 <body>
 
+
     <header>
 
         <!-- Contenu du Dropdown de la navbar -->
@@ -56,8 +57,17 @@
 
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Administration<i class="material-icons right">arrow_drop_down</i></a></li>
-
-                    {% endif %} {% endif %}
+                    
+                    {% endif %}
+                    {% if is_granted('ROLE_MEMBRE') and not(is_granted('ROLE_ADMIN')) %}
+                    <li>
+                        <a href="/profile">Mon profil</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Déconnexion</a>
+                    </li>
+                    {% endif %} 
+                     {% endif %}
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li><a href="/">Accueil</a></li>
@@ -66,8 +76,7 @@
                     <li>
                         <a href="/login">Connexion</a>
                     </li>
-                    {% else %}
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% else %} {% if is_granted('ROLE_ADMIN') %}
                     <!-- Dropdown Trigger -->
                     <li> Administration
                         <ul>
@@ -79,14 +88,11 @@
                             <li><a href="/logout">Déconnexion</a></li>
                         </ul>
                     </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_MEMBRE') %}
+                    {% endif %} {% if is_granted('ROLE_MEMBRE') %}
                     <li>
-                    <a href="/logout">Déconnexion</a>
+                        <a href="/logout">Déconnexion</a>
                     </li>
-                    {% endif %}
-
-                    {% endif %}
+                    {% endif %} {% endif %}
                 </ul>
             </div>
         </nav>
@@ -124,8 +130,19 @@
             <h3 class="deep-purple-text lighten-1">Nos derniers articles</h3>
 
             <div class="row">
-                
-                {% for article in articles %}
+
+                {% if articles|length == 0 %}
+
+                <div class="row">
+                    <div class="col s12 m5">
+                        <div class="card-panel deep-purple lighten-5">
+                            <p class="black-text">Il n'y a pas d'articles pour le moment !
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %} {% for article in articles %}
 
                 <div class="col s10 offset-s1 m4">
                     <div class="card">
@@ -141,10 +158,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {% endfor %}
-                
-                
+
+
             </div>
         </div>
 
@@ -175,8 +192,8 @@
             </div>
         </div>
         <div class="footer-copyright">
-            
-                <p class="white-text right-align"> © 2016 Copyright Le Collectif des Fourmiz</p>
+
+            <p class="white-text right-align"> © 2016 Copyright Le Collectif des Fourmiz</p>
 
         </div>
     </footer>
@@ -190,6 +207,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+
             $(".button-collapse").sideNav();
 
             $('.dropdown-button').dropdown({

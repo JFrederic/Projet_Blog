@@ -1,58 +1,67 @@
 {% extends 'base.html.twig' %} {% block body %}
 
-<div class="container">
-<h2 class="deep-purple-text lighten-1">Mes articles</h2>
+<div id="listeArticles" class="container">
+    <h2 class="deep-purple-text lighten-1">Mes articles</h2>
 
-<table class="striped">
-    <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Date de création</th>
-            <th>Statut</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+    <table class="striped">
+        <thead>
+            <tr>
+               
+                <th>Titre</th>
+                <th>Date de publication</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-    <tbody>
-        {% for article in articles %}
-        <tr>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                
+                <td>{{ article.titre }}</td>
 
-            <td>{{ article.titre }}</td>
-
-            <td>{% if article.dateCreation %}{{ article.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>
-                <div class="switch">
-                    <label>
-                        Brouillon
-                        <input type="checkbox" id="mycheckbox" disabled {% if article.brouillon==0 %}checked{% endif %}>
-                        <span class="lever"></span> Publié
-                    </label>
-                </div>
-            </td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('article_show', { 'id': article.id }) }}" class="deep-purple-text"><i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+                <td>{% if article.dateCreation %}
+                {% if article.brouillon == 0 %}
+                {{ article.dateCreation|date('Y-m-d H:i:s') }}
+                {% elseif article.brouillon == 1 %}
+                <p>Pas encore publié</p>
+                {% endif %}
+                {% endif %}</td>
+                <td>
+                    <div class="switch">
+                        <label>
+                            Brouillon
+                            <input type="checkbox" id="mycheckbox" disabled {% if article.brouillon==0 %}checked{% endif %}>
+                            <span class="lever"></span> Publié
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('article_show', { 'id': article.id }) }}" class="deep-purple-text tooltipped" data-position="left" data-delay="50" data-tooltip="Voir l'article"><i class="fa fa-eye fa-2x" aria-hidden="true"></i>
 </a>
-                   
-                        <a href="{{ path('article_edit', { 'id': article.id }) }}" class="blue-text"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+
+                            <a href="{{ path('article_edit', { 'id': article.id }) }}" class="blue-text tooltipped" data-position="right" data-delay="50" data-tooltip="Editer l'article"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
 </a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="action-btn">
+        <a href="{{ path('article_new') }}" class="btn-floating btn-large deep-purple lighten-1 tooltipped" data-position="right" data-delay="50" data-tooltip="Créer un nouvel article">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+
+    </div>
 </div>
 
 
 
-<ul>
-    <li>
-        <a href="{{ path('article_new') }}" class="waves-effect waves-light btn deep-purple lighten-1"><i class="fa fa-plus" aria-hidden="true"></i>Nouvel article</a>
-        
-    </li>
-</ul>
-{% endblock %}
 
+
+{% endblock %}
