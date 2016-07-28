@@ -85,6 +85,15 @@ class User extends BaseUser
      */
     private $imageName;
 
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+
+
 
 
 

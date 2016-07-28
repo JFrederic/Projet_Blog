@@ -35,6 +35,7 @@ class Commentaires
 
     /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $article;
 

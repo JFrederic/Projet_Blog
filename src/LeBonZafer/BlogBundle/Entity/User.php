@@ -84,8 +84,15 @@ class User extends BaseUser
      * @ORM\Column(name="imageName", type="string", length=255, nullable=true)
      */
     private $imageName;
-    
-   
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+
 
 
 
@@ -352,5 +359,29 @@ class User extends BaseUser
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return User
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

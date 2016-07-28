@@ -22,6 +22,8 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
+
+
         $em = $this->getDoctrine()->getManager();
 
         $articles = $em->getRepository('BlogBundle:Article')->findAll();
@@ -87,12 +89,10 @@ class ArticleController extends Controller
      *
      */
 
-    public function showSingleAction(Request $request,Article $article , $id  )
+    public function showSingleAction(Request $request, Article $article, $id)
     {
 
-
           $comment = new Commentaires();
-
           $comment_form = $this->createFormBuilder($comment)
               ->add('commentaire',TextareaType::class)
               ->add('validate', SubmitType::class)
@@ -111,14 +111,11 @@ class ArticleController extends Controller
                $em->persist($comment);
                $em->flush();
 
-            return $this->redirectToRoute('add_comment');
+            return $this->redirectToRoute('single_article' , array('id' => $id ));
            }
 
            $em = $this->getDoctrine()->getManager();
            $comments = $em->getRepository('BlogBundle:Commentaires')->findByArticle($id);
-
-
-
 
         return $this->render('BlogBundle:article:single_article.html.twig', array(
             'article' => $article,
@@ -169,6 +166,9 @@ class ArticleController extends Controller
      */
     public function deleteAction(Request $request, Article $article)
     {
+
+
+
         $form = $this->createDeleteForm($article);
         $form->handleRequest($request);
 
@@ -190,8 +190,11 @@ class ArticleController extends Controller
      */
     private function createDeleteForm(Article $article)
     {
+        $comment = new Commentaires();
+
+
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('article_delete', array('id' => $article->getId())))
+            ->setAction($this->generateUrl('article_delete', array('id' => $article->getId() , 'commentId' => $comment->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

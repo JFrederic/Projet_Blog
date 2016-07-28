@@ -17,3 +17,8 @@ single_article:
 add_comment:
     path:     /comment
     defaults: { _controller: BlogBundle:Commentaire:showComments }
+
+
+edit_comment:
+    path:     /{commentId}/{id}/edit/comment
+    defaults: { _controller: BlogBundle:Commentaire:editComments }
