@@ -63,6 +63,13 @@ class User extends BaseUser
     private $article;
 
     /**
+     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="user")
+     */
+    private $comments;
+
+
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="avatar_image", fileNameProperty="imageName")
@@ -311,5 +318,39 @@ class User extends BaseUser
     public function getImageName()
     {
         return $this->imageName;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $comment
+     *
+     * @return User
+     */
+    public function addComment(\LeBonZafer\BlogBundle\Entity\Commentaires $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $comment
+     */
+    public function removeComment(\LeBonZafer\BlogBundle\Entity\Commentaires $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

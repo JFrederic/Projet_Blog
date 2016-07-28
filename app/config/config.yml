@@ -50,13 +50,16 @@ vich_uploader:
         article_image:
             uri_prefix:         /images/products
             upload_destination: %kernel.root_dir%/../web/images/products
+
         avatar_image:
             uri_prefix:         /images/products
             upload_destination: %kernel.root_dir%/../web/images/products
 
+
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+
 
 # Doctrine Configuration
 doctrine:

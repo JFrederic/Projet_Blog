@@ -1,6 +1,5 @@
 <?php
-namespace LeBonZafer\BlogBundle\EventListener;
-
+namespace Meeteo\MeeteoBundle\EventListener;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -25,9 +24,9 @@ class RegistrationListener implements EventSubscriberInterface {
     public function onRegistrationSuccess(FormEvent $event) {
         /** @var $user \FOS\UserBundle\Model\UserInterface */
         $user = $event->getForm()->getData();
-        $user->addRole('ROLE_MEMBRE');
+        $user->addRole('ROLE_METEOROLOGUE');
 
-        $url = $this->router->generate('blog_homepage');
+        $url = $this->router->generate('homepage');
         $event->setResponse(new RedirectResponse($url));
     }
 }

@@ -13,7 +13,3 @@ services:
         class: LeBonZafer\BlogBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: app_user_profile }
-
-
-    
-
