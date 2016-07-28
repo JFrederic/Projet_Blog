@@ -47,6 +47,9 @@
                     <!--                <li><a href="badges.html">Articles</a></li>-->
                     {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <li>
+                        <a href="/register">Inscription</a>
+                    </li>
+                    <li>
                         <a href="/login">Connexion</a>
                     </li>
                     {% else %} {% if is_granted('ROLE_ADMIN') %}
