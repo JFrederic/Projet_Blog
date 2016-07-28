@@ -20,7 +20,8 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('imageFile', VichImageType::class, array('label' => ' ', 'required' => false))
+            ->add('imageFile', VichImageType::class, array(
+                'label' => ' '))
             ->add('save', SubmitType::class)
             ->add('brouillon', SubmitType::class)
 
