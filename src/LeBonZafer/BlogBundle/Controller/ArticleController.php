@@ -77,6 +77,23 @@ class ArticleController extends Controller
         ));
     }
 
+
+    /**
+     * Finds and displays a Article entity for all.
+     *
+     */
+
+    public function showSingleAction(Article $article)
+    {
+
+
+        return $this->render('BlogBundle:article:single_article.html.twig', array(
+            'article' => $article,
+
+        ));
+    }
+
+
     /**
      * Displays a form to edit an existing Article entity.
      *
@@ -136,5 +153,5 @@ class ArticleController extends Controller
         ;
     }
 
-  
+
 }

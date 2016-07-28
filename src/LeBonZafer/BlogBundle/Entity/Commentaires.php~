@@ -28,6 +28,11 @@ class Commentaires
      */
     private $commentaire;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     */
+    private $utilisateur;
+
 
     /**
      * Get id
@@ -63,4 +68,3 @@ class Commentaires
         return $this->commentaire;
     }
 }
-

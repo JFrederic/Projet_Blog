@@ -63,9 +63,16 @@ class User extends BaseUser
     private $article;
 
     /**
+     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="utilisateur")
+     */
+    private $comments;
+
+
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="avatar_image", fileNameProperty="imageName")
      *
      * @var File
      */

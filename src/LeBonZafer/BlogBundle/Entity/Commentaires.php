@@ -28,6 +28,11 @@ class Commentaires
      */
     private $commentaire;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     */
+    private $utilisateur;
+
 
     /**
      * Get id
@@ -61,5 +66,29 @@ class Commentaires
     public function getCommentaire()
     {
         return $this->commentaire;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\User $utilisateur
+     *
+     * @return Commentaires
+     */
+    public function setUtilisateur(\LeBonZafer\BlogBundle\Entity\User $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \LeBonZafer\BlogBundle\Entity\User
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }
