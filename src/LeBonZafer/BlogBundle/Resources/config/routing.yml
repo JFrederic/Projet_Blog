@@ -13,3 +13,7 @@ blog_homepage:
 single_article:
   path:      /{id}/single-article
   defaults: { _controller: BlogBundle:Article:showSingle }
+
+add_comment:
+    path:     /comment
+    defaults: { _controller: BlogBundle:Commentaire:showComments }

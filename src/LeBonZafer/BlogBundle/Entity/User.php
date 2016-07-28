@@ -63,7 +63,7 @@ class User extends BaseUser
     private $article;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="user")
      */
     private $comments;
 

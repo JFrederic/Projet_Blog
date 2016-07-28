@@ -4,8 +4,10 @@ namespace LeBonZafer\BlogBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use LeBonZafer\BlogBundle\Entity\Article;
+use LeBonZafer\BlogBundle\Entity\Commentaires;
 use LeBonZafer\BlogBundle\Form\ArticleType;
 
 /**
@@ -71,6 +73,8 @@ class ArticleController extends Controller
     {
         $deleteForm = $this->createDeleteForm($article);
 
+
+
         return $this->render('article/show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
@@ -83,12 +87,43 @@ class ArticleController extends Controller
      *
      */
 
-    public function showSingleAction(Article $article)
+    public function showSingleAction(Request $request,Article $article , $id  )
     {
+
+
+          $comment = new Commentaires();
+
+          $comment_form = $this->createFormBuilder($comment)
+              ->add('commentaire',TextareaType::class)
+              ->add('validate', SubmitType::class)
+              ->getForm();
+
+              $comment_form->handleRequest($request);
+
+              if ($comment_form->isSubmitted() && $comment_form->isValid()) {
+              //  $comment = $comment_form->getData();
+               $token = $this->get('security.token_storage')->getToken();
+               $user = $token->getUser();
+               $article->getId($id);
+               $comment->setArticle($article);
+               $comment->setUser($user);
+               $em = $this->getDoctrine()->getEntityManager();
+               $em->persist($comment);
+               $em->flush();
+
+            return $this->redirectToRoute('add_comment');
+           }
+
+           $em = $this->getDoctrine()->getManager();
+           $comments = $em->getRepository('BlogBundle:Commentaires')->findByArticle($id);
+
+
 
 
         return $this->render('BlogBundle:article:single_article.html.twig', array(
             'article' => $article,
+            'comment_form' => $comment_form->createView(),
+            'comments' => $comments,
 
         ));
     }

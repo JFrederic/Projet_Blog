@@ -36,6 +36,37 @@
 
 <h5>Poster un commentaire :</h5>
 
+{{form_start(comment_form)}}
+{{form_widget(comment_form)}}
+<div class="row">
+    <div class="input-field col s12">
+        {{ form_widget(comment_form.validate, {'label':'Publier' , 'attr': {'class':'waves-effect waves-light btn-flat blue lighten-1'}}) }}
+    </div>
+</div>
+{{form_end(comment_form)}}
+
+
+
+
+
+
+   {% for comment in comments %}
+   <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/images/products/{{comment.user.imageName}}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+                <h5>{{comment.user.username}}</h5>
+              <span class="black-text">
+                {{comment.commentaire}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
 
 
 <li>

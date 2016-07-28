@@ -57,7 +57,12 @@ class Article
      */
     private $admin;
 
-    
+    /**
+     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="article")
+     */
+    private $comments;
+
+
 
 
 
@@ -276,4 +281,38 @@ class Article
 
 
 
+
+    /**
+     * Add comment
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $comment
+     *
+     * @return Article
+     */
+    public function addComment(\LeBonZafer\BlogBundle\Entity\Commentaires $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $comment
+     */
+    public function removeComment(\LeBonZafer\BlogBundle\Entity\Commentaires $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }

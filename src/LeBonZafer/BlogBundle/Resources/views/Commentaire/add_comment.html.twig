@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}BlogBundle:Commentaire:addComment{% endblock %}
+
+{% block body %}
+
+{% for comment in comments %}
+  <div class="container">
+    <div class="row">
+      <h3>{{comment.article.titre}}</h3>
+      <h5>{{comment.user.username}}</h5>
+      <p>
+        {{comment.commentaire}}
+
+      </p>
+
+    </div>
+
+  </div>
+  </p>
+{% endfor %}
+
+{% endblock %}
