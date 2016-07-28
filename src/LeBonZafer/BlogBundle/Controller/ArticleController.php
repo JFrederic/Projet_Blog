@@ -54,7 +54,7 @@ class ArticleController extends Controller
             $em->flush();
 
 
-            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
+            return $this->redirectToRoute('article_index', array('id' => $article->getId()));
         }
 
         return $this->render('article/new.html.twig', array(

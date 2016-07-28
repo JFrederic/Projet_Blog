@@ -1,9 +1,19 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    {{ form_widget(form.imageFile) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
+<div class="container">
+   <div class="row">
+       <div class="center-align marge">
+           <h2> S'inscrire </h2>
+       </div>
+   </div>
+   <div class="row">
+       <div class="col s6 offset-s3">
+       {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+       {{ form_widget(form) }} </div>
+   </div><div class="row">
+   <div class="col s6 offset-s4">
+       <input class="btn btn-large waves-effect waves-ligth  deep-purple lighten-1" type="submit" value="{{ 'registration.submit'|trans }}" />
+   </div>
+   </div>
+</div>
 {{ form_end(form) }}
