@@ -111,7 +111,7 @@ class ArticleController extends Controller
                $em->persist($comment);
                $em->flush();
 
-            return $this->redirectToRoute('add_comment');
+            return $this->redirectToRoute('single_article', array('id' => $id));
            }
 
            $em = $this->getDoctrine()->getManager();
