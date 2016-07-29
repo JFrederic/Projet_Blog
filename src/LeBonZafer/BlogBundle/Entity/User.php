@@ -240,6 +240,7 @@ class User extends BaseUser
      *
      * @return string
      */
+
     public function getSexe()
     {
         return $this->sexe;
@@ -417,8 +418,6 @@ class User extends BaseUser
     {
         return $this->updatedAt;
     }
-<<<<<<< HEAD
-=======
 
     /**
      * Add likedcomment
@@ -455,5 +454,5 @@ class User extends BaseUser
     }
 
   
->>>>>>> master
+
 }
