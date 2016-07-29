@@ -24,15 +24,19 @@ class CommentaireController extends Controller
            $comments = $em->getRepository('BlogBundle:Commentaires')->findAll(); 
             
         }
-      
-             
-          
+      else{
           $token = $this->get('security.token_storage')->getToken();
           $user = $token->getUser();
           
           
           $em = $this->getDoctrine()->getManager();
           $comments = $em->getRepository('BlogBundle:Commentaires')->findByUser($user);
+          
+      }
+      
+             
+          
+          
           
       
         

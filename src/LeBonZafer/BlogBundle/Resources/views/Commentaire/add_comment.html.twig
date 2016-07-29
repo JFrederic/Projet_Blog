@@ -12,10 +12,11 @@
 
 
                     <p> {{comment.commentaire}}</p>
+                    <blockquote>{{comment.user.username}}</blockquote>
                 </div>
                 <div class="card-action ">
                     <a href="">Supprimer</a>
-                    <a href="#">Voir</a>
+                    <a href="/{{comment.article.id}}/single-article">Voir</a>
                 </div>
             </div>
         </div>

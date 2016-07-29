@@ -91,7 +91,7 @@
                         </ul>
                     </li>
                     {% endif %}
-                    {% if is_granted('ROLE_MEMBRE') %}
+                    {% if is_granted('ROLE_MEMBRE') and not(is_granted('ROLE_ADMIN')) %}
                     <li><a href="/profile">Mon profil</a></li>
                     <li><a href="/comment">Commentaires</a></li>
                     <li>
@@ -153,7 +153,8 @@
                 <div class="col s10 offset-s1 m4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="/images/products/{{ article.imageName }}">
+                           {% set imgArticle = 'images/products/'~ article.imageName %}
+                            <img src="{{ imgArticle}}">
                             <span class="card-title deep-purple lighten-1">{{ article.titre }}</span>
                         </div>
                         <div class="card-content">
