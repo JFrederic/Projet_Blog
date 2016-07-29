@@ -3,29 +3,29 @@
 
 {% block body %}
 
-<div class="container">
-       <div class="row">
-           <div class="center-align">
-               <h1 class="deep-purple-text lighten-1">{{ article.titre }}</h1>
-               <p class="center-align">
 
-               {% if article.dateCreation %}Posté le {{ article.dateCreation|date('d-m-Y') }} à {{ article.dateCreation|date('h:m') }}{% endif %}
-               </p>            </div>
-       </div>
-   </div>    <div class="container">
-       <div class="row">
-           <div class="col s4">
-               <img class="responsive-img" src="/images/products/{{ article.imageName }}" alt=""/>
-           </div>            <div class="col s8">
+ <div class="container">
+      <div class="row">
+        <div class="col s10 offset-s1">
+          <div class="card">
+            <div class="card-image">
+              <img class="responsive-img" src="/images/products/{{ article.imageName }}" alt=""/>
+              <span class="card-title deep-purple lighten-1">{{ article.titre }}</span>
+            </div>
+            <div class="card-content">
+              <p>{{ article.description }}</p>
+            </div>
+            <div class="card-action right-align">
+              <span>{% if article.dateCreation %}Posté le {{ article.dateCreation|date('d-m-Y') }} à {{ article.dateCreation|date('h:m') }}{% endif %}</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-              <span> {{ article.description }}</span></p>
-
-       </div>
-</div>
 
 {% if is_granted('ROLE_MEMBRE') %}
 
-<h5>Poster un commentaire :</h5>
+<h4 class="deep-purple-text">Poster un commentaire :</h4>
 
 {{form_start(comment_form)}}
 {{form_widget(comment_form.commentaire)}}
@@ -45,37 +45,43 @@
 
 
 
-
+<div class="row">
 
 
            <h3 class="deep-purple-text center-align">Commentaires</h3>
    {% for comment in comments %}
-   <div class="col s12 m8 offset-m2 l6 offset-l3">
-        <div class="card-panel grey lighten-5 z-depth-1">
-          <div class="row valign-wrapper">
-            <div class="col s2">
-              <img src="/images/products/{{comment.user.imageName}}" alt="" class="responsive-img"> <!-- notice the "circle" class -->
-            </div>
-            <div class="col s10">
-                <h5>{{comment.user.username}}</h5>
-              <span class="black-text">
-                {{comment.commentaire}}
-              </span>
-            </div>
-             <a href="/{{comment.id}}/like/comment" class="secondary-content"><i class="material-icons"></i>Like</a>
-            {% if user.id == comment.user.id %}
-            <a href="/{{comment.id}}/{{article.id}}/edit/comment">Editer</a>
-            {% endif %}
 
-          </div>
+  <div class="col s12">
+
+    <div class="card horizontal deep-purple lighten-5 row">
+      <div class="card-image col s3">
+        <img src="/images/products/{{comment.user.imageName}}" alt="" class="img-responsive">
+      </div>
+      <div class="card-stacked col s8 offset-s1">
+        <div class="card-content">
+         <h5>{{comment.user.username}}</h5>
+          <p>{{comment.commentaire}}</p>
+        </div>
+        <div class="card-action">
+          <a href="/{{comment.id}}/{{article.id}}/like/comment" class="secondary-content"><i class="material-icons"></i>Like</a>
+          {% if user.id == comment.user.id %}
+          <a href="/{{comment.id}}/{{article.id}}/edit/comment">Editer</a>
+          {% endif %}
+
         </div>
       </div>
+    </div>
+  </div>
     {% endfor %}
+    </div>
 
 
-<li>
-    <a href="{{ path('blog_homepage') }}">Retour à l'accueil</a>
-</li>
+
+
+<a href="{{ path('blog_homepage') }}" class="deep-purple-text"><i class="fa fa-reply" aria-hidden="true"></i>Retour à l'accueil</a>
+
+
+</div>
 
 
 

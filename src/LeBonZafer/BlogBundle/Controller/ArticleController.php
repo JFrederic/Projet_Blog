@@ -40,6 +40,8 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
+
+
         $article = new Article();
         $form = $this->createForm('LeBonZafer\BlogBundle\Form\ArticleType', $article);
         $form->handleRequest($request);
@@ -119,6 +121,9 @@ class ArticleController extends Controller
             return $this->redirectToRoute('single_article', array('id' => $id));
 
            }
+
+
+           
 
            $em = $this->getDoctrine()->getManager();
            $comments = $em->getRepository('BlogBundle:Commentaires')->findByArticle($id);

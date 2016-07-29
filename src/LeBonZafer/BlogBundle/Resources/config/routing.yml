@@ -25,5 +25,5 @@ edit_comment:
 
 
 like_comment:
-    path:     /{commentId}/like/comment
+    path:     /{commentId}/{id}/like/comment
     defaults: { _controller: BlogBundle:Commentaire:like }

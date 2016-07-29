@@ -57,22 +57,27 @@ class User extends BaseUser
      */
     private $dateDeNaissance;
 
+
+
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="admin")
      */
     private $article;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="user" )
      */
     private $comments;
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Commentaires", inversedBy="likes")
-     * @ORM\JoinTable(name="comment_like")
+     * @ORM\OneToMany(targetEntity="Likes", mappedBy="utilisateur" )
      */
-    protected $likedcomments;
+   private $like;
+
+
+
+
 
 
 
@@ -429,4 +434,40 @@ class User extends BaseUser
     }
 
 
+
+
+
+    /**
+     * Add like
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Likes $like
+     *
+     * @return User
+     */
+    public function addLike(\LeBonZafer\BlogBundle\Entity\Likes $like)
+    {
+        $this->like[] = $like;
+
+        return $this;
+    }
+
+    /**
+     * Remove like
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Likes $like
+     */
+    public function removeLike(\LeBonZafer\BlogBundle\Entity\Likes $like)
+    {
+        $this->like->removeElement($like);
+    }
+
+    /**
+     * Get like
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLike()
+    {
+        return $this->like;
+    }
 }

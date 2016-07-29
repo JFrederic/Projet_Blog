@@ -2,6 +2,7 @@
 
 namespace LeBonZafer\BlogBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,21 +30,30 @@ class Commentaires
     private $commentaire;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments" )
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments" )
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     private $article;
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="likedcomments")
+     * @ORM\OneToMany(targetEntity="Likes", mappedBy="comment" )
      */
-    private $likes;
+   private $like;
+
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="likes", type="integer" , nullable=true)
+     */
+    private $listelikes;
+
 
 
     /**
@@ -150,5 +160,80 @@ class Commentaires
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->likes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set listelikes
+     *
+     * @param integer $listelikes
+     *
+     * @return Commentaires
+     */
+    public function setListelikes($listelikes)
+    {
+        $this->listelikes = $listelikes;
+
+        return $this;
+    }
+
+    /**
+     * Get listelikes
+     *
+     * @return integer
+     */
+    public function getListelikes()
+    {
+        return $this->listelikes;
+    }
+
+    /**
+     * Add like
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\User $like
+     *
+     * @return Commentaires
+     */
+    public function addLike(\LeBonZafer\BlogBundle\Entity\User $like)
+    {
+        $this->likes[] = $like;
+
+        return $this;
+    }
+
+    /**
+     * Remove like
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\User $like
+     */
+    public function removeLike(\LeBonZafer\BlogBundle\Entity\User $like)
+    {
+        $this->likes->removeElement($like);
+    }
+
+    /**
+     * Get likes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * Get like
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLike()
+    {
+        return $this->like;
     }
 }

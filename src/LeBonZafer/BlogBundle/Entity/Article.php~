@@ -53,14 +53,16 @@ class Article
     private $brouillon;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="article")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="article" , cascade={"remove"})
      */
     private $admin;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="article" , cascade={"remove"})
      */
     private $comments;
+
+
 
 
 
