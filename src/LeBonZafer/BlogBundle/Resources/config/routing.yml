@@ -22,3 +22,8 @@ add_comment:
 edit_comment:
     path:     /{commentId}/{id}/edit/comment
     defaults: { _controller: BlogBundle:Commentaire:editComments }
+
+
+like_comment:
+    path:     /{commentId}/like/comment
+    defaults: { _controller: BlogBundle:Commentaire:like }

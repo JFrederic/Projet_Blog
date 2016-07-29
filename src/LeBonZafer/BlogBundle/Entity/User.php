@@ -95,7 +95,7 @@ class User extends BaseUser
     private $imageName;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      *
      * @var \DateTime
      */
@@ -428,5 +428,5 @@ class User extends BaseUser
         return $this->likedcomments;
     }
 
-  
+
 }

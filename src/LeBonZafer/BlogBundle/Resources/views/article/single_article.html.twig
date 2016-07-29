@@ -8,7 +8,7 @@
            <div class="center-align">
                <h1 class="deep-purple-text lighten-1">{{ article.titre }}</h1>
                <p class="center-align">
-       
+
                {% if article.dateCreation %}Posté le {{ article.dateCreation|date('d-m-Y') }} à {{ article.dateCreation|date('h:m') }}{% endif %}
                </p>            </div>
        </div>
@@ -17,12 +17,12 @@
            <div class="col s4">
                <img class="responsive-img" src="/images/products/{{ article.imageName }}" alt=""/>
            </div>            <div class="col s8">
-              
+
               <span> {{ article.description }}</span></p>
-               
+
        </div>
 </div>
-  
+
 {% if is_granted('ROLE_MEMBRE') %}
 
 <h5>Poster un commentaire :</h5>
@@ -62,8 +62,11 @@
                 {{comment.commentaire}}
               </span>
             </div>
+             <a href="/{{comment.id}}/like/comment" class="secondary-content"><i class="material-icons"></i>Like</a>
+            {% if user.id == comment.user.id %}
             <a href="/{{comment.id}}/{{article.id}}/edit/comment">Editer</a>
-            <a href="">Like</a>
+            {% endif %}
+
           </div>
         </div>
       </div>

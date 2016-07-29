@@ -94,8 +94,9 @@ class ArticleController extends Controller
 
 
           $comment = new Commentaires();
+          $token = $this->get('security.token_storage')->getToken();
+          $user = $token->getUser();
 
-          
           $comment_form = $this->createFormBuilder($comment)
               ->add('commentaire',TextareaType::class)
               ->add('validate', SubmitType::class)
@@ -124,6 +125,7 @@ class ArticleController extends Controller
 
         return $this->render('BlogBundle:article:single_article.html.twig', array(
             'article' => $article,
+            'user' => $user,
             'comment_form' => $comment_form->createView(),
             'comments' => $comments,
 
