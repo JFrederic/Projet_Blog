@@ -1,23 +1,38 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}BlogBundle:Commentaire:addComment{% endblock %}
+{% block title %}Commentaires{% endblock %}
 
 {% block body %}
 
-{% for comment in comments %}
-  <div class="container">
-    <div class="row">
-      <h3>{{comment.article.titre}}</h3>
-      <h5>{{comment.user.username}}</h5>
-      <p>
-        {{comment.commentaire}}
+<div class="row">
 
-      </p>
+  {% for comment in comments %}
+   {% if comment.article == null %}
+   <div class="row">
+       <div class="col s12 m5">
+           <div class="card-panel deep-purple lighten-5">
+               <p class="black-text">Cette article à été supprimer , votre commentaire n'est plus visible.
+               </p>
+           </div>
+       </div>
+   </div>
+   {% else %}
+       <div class="col s12 m4">
+         <div class="card blue-grey darken-1">
+           <div class="card-content white-text">
+             <span class="card-title">{{comment.article.titre}}</span>
 
-    </div>
 
-  </div>
-  </p>
-{% endfor %}
+             <p>  {{comment.commentaire}}</p>
+           </div>
+           <div class="card-action ">
+             <a href="">Supprimer</a>
+             <a href="#">Voir</a>
+           </div>
+         </div>
+       </div>
+        {% endif %}
+  {% endfor %}
+     </div>
 
 {% endblock %}
