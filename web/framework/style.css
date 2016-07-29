@@ -19,7 +19,7 @@ nav{
 
 
 
-h1, h2, h3{
+h1, h2, h3, h4{
     font-family: 'Quicksand', cursive;
 }
 
@@ -40,6 +40,8 @@ nav a{
     font-family: 'Irish Grover';
     font-size: 42px;
 }
+
+
 
 footer{
     font-family: 'Play', cursive;
