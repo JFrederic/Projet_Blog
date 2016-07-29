@@ -48,29 +48,29 @@ class CommentaireController extends Controller
 
   }
 
-  public function LikeAction($id)
-
-  {
-
-
-    $token = $this->get('security.token_storage')->getToken();
-    $user = $token->getUser();
-
-    $em = $this->getDoctrine()->getManager();
-    $articles = $em->getRepository('BlogBundle:Article')->find($id);
-
-    // $em = $this->getDoctrine()->getManager();
-    // $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
-
-
-
-
-
-
-      return $this->redirectToRoute('single_article' , array('id' => $id ));
-
-      
-  }
+  // public function LikeAction($id)
+  //
+  // {
+  //
+  //
+  //   $token = $this->get('security.token_storage')->getToken();
+  //   $user = $token->getUser();
+  //
+  //   $em = $this->getDoctrine()->getManager();
+  //   $articles = $em->getRepository('BlogBundle:Article')->find($id);
+  //
+  //   // $em = $this->getDoctrine()->getManager();
+  //   // $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
+  //
+  //
+  //
+  //
+  //
+  //
+  //     return $this->redirectToRoute('single_article' , array('id' => $id ));
+  //
+  //
+  // }
 
 
 
