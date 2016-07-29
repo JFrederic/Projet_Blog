@@ -6,6 +6,10 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
 
 /**
  * @ORM\Entity
@@ -24,6 +28,11 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
      *
      * @ORM\Column(name="nom", type="string",length=255 , nullable=true)
      */
@@ -31,15 +40,24 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
      *
-     * @ORM\Column(name="prenom", type="string", length=255 , nullable=true)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
 
     /**
      * @var string
+     * @Assert\Regex(
+     *     pattern="/^(0262|0692|0693)\d{6,6}$/",
+     *     message="10 number max"
+     * )
      *
-     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
+     * @ORM\Column(name="telephone", type="string", length=10, nullable=true)
      */
     private $telephone;
 
@@ -105,6 +123,11 @@ class User extends BaseUser
      * @var \DateTime
      */
     private $updatedAt;
+
+
+
+
+
 
 
 
@@ -221,6 +244,7 @@ class User extends BaseUser
      *
      * @return string
      */
+
     public function getSexe()
     {
         return $this->sexe;
@@ -433,10 +457,6 @@ class User extends BaseUser
         return $this->likedcomments;
     }
 
-
-
-
-
     /**
      * Add like
      *
@@ -470,4 +490,5 @@ class User extends BaseUser
     {
         return $this->like;
     }
+
 }

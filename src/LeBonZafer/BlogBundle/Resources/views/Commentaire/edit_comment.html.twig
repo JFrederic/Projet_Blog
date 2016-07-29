@@ -2,6 +2,8 @@
 
 
 {% block body %}
+<div class="container">
+<h3 class="deep-purple-text lighten-1">Modifier le commentaire</h3>
 {{form_start(edit_form)}}
 {{form_widget(edit_form.commentaire)}}
 
@@ -11,5 +13,5 @@
   </button>
 </div>
 {{form_end(edit_form)}}
-
+</div>
 {% endblock %}
