@@ -12,15 +12,35 @@ class CommentaireController extends Controller
 
   public function showCommentsAction()
   {
-
-
-        $em = $this->getDoctrine()->getManager();
-        $comments = $em->getRepository('BlogBundle:Commentaires')->findAll();
-
+      $auth_checker = $this->get('security.authorization_checker');
+       // Check for Roles on the $auth_checker
+       $isRoleAdmin = $auth_checker->isGranted('ROLE_ADMIN');
+        
+      
+    
+        
+        if($isRoleAdmin){
+            $em = $this->getDoctrine()->getManager();
+           $comments = $em->getRepository('BlogBundle:Commentaires')->findAll(); 
+            
+        }
+      
+             
+          
+          $token = $this->get('security.token_storage')->getToken();
+          $user = $token->getUser();
+          
+          
+          $em = $this->getDoctrine()->getManager();
+          $comments = $em->getRepository('BlogBundle:Commentaires')->findByUser($user);
+          
+      
+        
 
         return $this->render('BlogBundle:Commentaire:add_comment.html.twig' , array(
             'comments' => $comments,
         ));
+        
   }
 
   public function editCommentsAction( Request $request , $commentId , $id)
