@@ -104,6 +104,7 @@ class ArticleController extends Controller
               ->add('validate', SubmitType::class)
               ->getForm();
 
+              
               $comment_form->handleRequest($request);
 
               if ($comment_form->isSubmitted() && $comment_form->isValid()) {
@@ -123,7 +124,7 @@ class ArticleController extends Controller
            }
 
 
-           
+
 
            $em = $this->getDoctrine()->getManager();
            $comments = $em->getRepository('BlogBundle:Commentaires')->findByArticle($id);

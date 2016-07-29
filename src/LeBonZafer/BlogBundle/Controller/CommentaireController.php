@@ -11,23 +11,34 @@ use Symfony\Component\HttpFoundation\Request;
 class CommentaireController extends Controller
 {
 
+
+  /* Affichage des commentaires. */
   public function showCommentsAction()
   {
 
+      /* Sécurité qui vérifie si l'utilisateur est un admin du blog */
       $auth_checker = $this->get('security.authorization_checker');
-       // Check for Roles on the $auth_checker
-       $isRoleAdmin = $auth_checker->isGranted('ROLE_ADMIN');
+      $isRoleAdmin = $auth_checker->isGranted('ROLE_ADMIN');
+
+
+    /* Affiche tous les commentaires du blog si l'utilisateur est connecté en tant qu'administrateur. */
 
         if($isRoleAdmin){
             $em = $this->getDoctrine()->getManager();
            $comments = $em->getRepository('BlogBundle:Commentaires')->findAll();
 
         }
+
+    /* Sinon si l'utilisateur est un membre affiche uniquement ses commentaires.*/
       else
       {
+
+    /* Recupère le jeton(id) de l'utilisateur connecté */
+
           $token = $this->get('security.token_storage')->getToken();
           $user = $token->getUser();
 
+   /* Va chercher dans la base les commentaires postés selon l'utilisateur */
 
           $em = $this->getDoctrine()->getManager();
           $comments = $em->getRepository('BlogBundle:Commentaires')->findByUser($user);
@@ -41,8 +52,11 @@ class CommentaireController extends Controller
 
   }
 
+
+
   public function editCommentsAction( Request $request , $commentId , $id)
   {
+
 
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
@@ -74,32 +88,38 @@ class CommentaireController extends Controller
   }
 
 
+
+
+
   public function deleteCommentsAction($commentId)
 
   {
 
-    $em = $this->getDoctrine()->getManager();
-      $news = $em->getRepository('FooNewsBundle:News')->find($id);
-      if (!$news) {
+      $em = $this->getDoctrine()->getManager();
+      $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
+      if (!$comment) {
         throw $this->createNotFoundException(
-                'No news found for id ' . $id
+                'Pas de commentaire trouvé pour ' . $commentid
         );
       }
 
-      $form = $this->createFormBuilder($news)
+      $form = $this->createFormBuilder($comment)
               ->add('delete', 'submit')
               ->getForm();
 
       $form->handleRequest($request);
 
       if ($form->isValid()) {
-        $em->remove($news);
+        $em->remove($comment);
         $em->flush();
       }
 
       $build['form'] = $form->createView();
       return $this->render('FooNewsBundle:Default:news_add.html.twig', $build);
     }
+
+
+
 
 
     public function LikeAction($commentId , $id)

@@ -11,7 +11,7 @@
                     <span class="card-title deep-purple-text">{{comment.article.titre}}</span>
 
 
-                    <p> {{comment.commentaire}}</p>
+                    <p> {{comment.commentaire|raw|nl2br}}</p>
                     <blockquote>{{comment.user.username}}</blockquote>
                 </div>
                 <div class="card-action ">
