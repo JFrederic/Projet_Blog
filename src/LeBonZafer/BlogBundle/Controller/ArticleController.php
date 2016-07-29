@@ -92,7 +92,10 @@ class ArticleController extends Controller
     public function showSingleAction(Request $request, Article $article, $id)
     {
 
+
           $comment = new Commentaires();
+
+          
           $comment_form = $this->createFormBuilder($comment)
               ->add('commentaire',TextareaType::class)
               ->add('validate', SubmitType::class)
@@ -190,11 +193,11 @@ class ArticleController extends Controller
      */
     private function createDeleteForm(Article $article)
     {
-        $comment = new Commentaires();
+
 
 
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('article_delete', array('id' => $article->getId() , 'commentId' => $comment->getId())))
+            ->setAction($this->generateUrl('article_delete', array('id' => $article->getId() )))
             ->setMethod('DELETE')
             ->getForm()
         ;

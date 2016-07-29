@@ -62,6 +62,8 @@ class Article
      */
     private $comments;
 
+  
+
 
 
 

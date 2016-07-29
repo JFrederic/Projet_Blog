@@ -68,6 +68,15 @@ class User extends BaseUser
     private $comments;
 
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Commentaires", inversedBy="likes")
+     * @ORM\JoinTable(name="comment_like")
+     */
+    protected $likedcomments;
+
+
+
+
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -384,4 +393,40 @@ class User extends BaseUser
     {
         return $this->updatedAt;
     }
+
+    /**
+     * Add likedcomment
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment
+     *
+     * @return User
+     */
+    public function addLikedcomment(\LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment)
+    {
+        $this->likedcomments[] = $likedcomment;
+
+        return $this;
+    }
+
+    /**
+     * Remove likedcomment
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment
+     */
+    public function removeLikedcomment(\LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment)
+    {
+        $this->likedcomments->removeElement($likedcomment);
+    }
+
+    /**
+     * Get likedcomments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLikedcomments()
+    {
+        return $this->likedcomments;
+    }
+
+  
 }

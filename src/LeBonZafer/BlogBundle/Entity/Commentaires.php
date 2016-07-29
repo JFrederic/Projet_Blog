@@ -39,6 +39,12 @@ class Commentaires
      */
     private $article;
 
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="likedcomments")
+     */
+    private $likes;
+
 
     /**
      * Get id

@@ -44,7 +44,11 @@
         {{ form_widget(comment_form.validate, {'label':'Publier' , 'attr': {'class':'waves-effect waves-light btn-flat blue lighten-1'}}) }}
 
     </div>
+
 </div>
+
+
+
 {{form_end(comment_form)}}
 
 
@@ -66,6 +70,7 @@
               </span>
             </div>
             <a href="/{{comment.id}}/{{article.id}}/edit/comment">Editer</a>
+            <a href="{{ render(controller('BlogBundle:Commentaires:like')) }}">Like</a>
           </div>
         </div>
       </div>
