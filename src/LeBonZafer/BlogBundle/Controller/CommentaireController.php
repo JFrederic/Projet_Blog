@@ -14,14 +14,64 @@ class CommentaireController extends Controller
   {
 
 
-              $em = $this->getDoctrine()->getManager();
-              $comments = $em->getRepository('BlogBundle:Commentaires')->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $comments = $em->getRepository('BlogBundle:Commentaires')->findAll();
 
 
-            return $this->render('BlogBundle:Commentaire:add_comment.html.twig' , array(
-                'comments' => $comments,
-            ));
+        return $this->render('BlogBundle:Commentaire:add_comment.html.twig' , array(
+            'comments' => $comments,
+        ));
   }
+
+  public function editCommentsAction( Request $request , $commentId , $id)
+  {
+
+
+    $em = $this->getDoctrine()->getManager();
+    $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
+    $articles = $em->getRepository('BlogBundle:Article')->find($id);
+    $editForm = $this->createFormBuilder($comment)
+               ->add('commentaire',TextareaType::class)
+               ->getForm();
+
+    $editForm->handleRequest($request);
+
+    if ($editForm->isSubmitted() && $editForm->isValid()) {
+        $em->flush();
+
+        return $this->redirectToRoute('single_article' , array('id' => $id ));
+    }
+
+    $build['edit_form'] = $editForm->createView();
+    return $this->render('BlogBundle:Commentaire:edit_comment.html.twig' , $build);
+
+
+  }
+
+  // public function LikeAction($id)
+  //
+  // {
+  //
+  //
+  //   $token = $this->get('security.token_storage')->getToken();
+  //   $user = $token->getUser();
+  //
+  //   $em = $this->getDoctrine()->getManager();
+  //   $articles = $em->getRepository('BlogBundle:Article')->find($id);
+  //
+  //   // $em = $this->getDoctrine()->getManager();
+  //   // $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
+  //
+  //
+  //
+  //
+  //
+  //
+  //     return $this->redirectToRoute('single_article' , array('id' => $id ));
+  //
+  //
+  // }
+
 
 
 }
