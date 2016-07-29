@@ -1,30 +1,26 @@
-{% extends "::base.html.twig" %}
+{% extends "::base.html.twig" %} {% block title %}Commentaires{% endblock %} {% block body %}
+<div class="container">
+<h3 class="deep-purple-text ">Commentaires</h3>
 
-{% block title %}Commentaires{% endblock %}
-
-{% block body %}
-
-<div class="row">
-
-  {% for comment in comments %}
-   {% if comment.article == null %}
-   {% else %}
-       <div class="col s12 m4">
-         <div class="card blue-grey darken-1">
-           <div class="card-content white-text">
-             <span class="card-title">{{comment.article.titre}}</span>
+    {% for comment in comments %}
+    <div class="row">
+        {% if comment.article == null %} {% else %}
+        <div class="col s12">
+            <div class="card deep-purple lighten-5">
+                <div class="card-content">
+                    <span class="card-title deep-purple-text">{{comment.article.titre}}</span>
 
 
-             <p>  {{comment.commentaire}}</p>
-           </div>
-           <div class="card-action ">
-             <a href="">Supprimer</a>
-             <a href="#">Voir</a>
-           </div>
-         </div>
-       </div>
+                    <p> {{comment.commentaire}}</p>
+                </div>
+                <div class="card-action ">
+                    <a href="">Supprimer</a>
+                    <a href="#">Voir</a>
+                </div>
+            </div>
+        </div>
         {% endif %}
-  {% endfor %}
-     </div>
-
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
