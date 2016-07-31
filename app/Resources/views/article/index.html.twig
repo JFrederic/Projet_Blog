@@ -5,7 +5,7 @@
     <table class="striped">
         <thead>
             <tr>
-               
+
                 <th>Titre</th>
                 <th>Date de publication</th>
                 <th>Statut</th>
@@ -16,7 +16,7 @@
         <tbody>
             {% for article in articles %}
             <tr>
-                
+
                 <td>{{ article.titre }}</td>
 
                 <td>{% if article.dateCreation %}
@@ -38,10 +38,21 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('article_edit', { 'id': article.id }) }}" class="blue-text tooltipped" data-position="right" data-delay="50" data-tooltip="Editer l'article"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
-</a>
-                    
+                            <a href="{{ path('article_edit', { 'id': article.id }) }}" class="blue-text tooltipped" data-position="left" data-delay="50" data-tooltip="Editer l'article"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+                            <a  href="{{ path('article_del', { 'id': article.id }) }}" class="red-text tooltipped" data-position="right" data-delay="50" data-tooltip="Editer l'article" > <i class="fa fa-trash fa-2x"> </i> </a>
+
                         </li>
+
+                        <li>
+
+
+
+
+
+
+                        </li>
+
+
                     </ul>
                 </td>-
             </tr>

@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use LeBonZafer\BlogBundle\Entity\Article;
 use LeBonZafer\BlogBundle\Entity\Commentaires;
+use LeBonZafer\BlogBundle\Entity\Likes;
 use LeBonZafer\BlogBundle\Form\ArticleType;
 
 /**
@@ -25,13 +26,29 @@ class ArticleController extends Controller
 
 
         $em = $this->getDoctrine()->getManager();
-
         $articles = $em->getRepository('BlogBundle:Article')->findAll();
+
 
         return $this->render('article/index.html.twig', array(
             'articles' => $articles,
 
+
         ));
+
+    }
+
+    public function deleteindexAction($id) {
+
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('BlogBundle:Article')->find($id);
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($article);
+        $em->flush();
+
+        return $this->redirectToRoute('article_index');
     }
 
     /**
@@ -40,8 +57,6 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
-
-
         $article = new Article();
         $form = $this->createForm('LeBonZafer\BlogBundle\Form\ArticleType', $article);
         $form->handleRequest($request);
@@ -91,50 +106,37 @@ class ArticleController extends Controller
      *
      */
 
-    public function showSingleAction(Request $request, Article $article, $id)
+    public function showSingleAction(Request $request, Article $article,  $id)
     {
+        $comment = new Commentaires();
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        $comment_form = $this->createFormBuilder($comment)
+            ->add('commentaire',TextareaType::class)
+            ->add('validate', SubmitType::class)
+            ->getForm();
 
-
-          $comment = new Commentaires();
-          $token = $this->get('security.token_storage')->getToken();
-          $user = $token->getUser();
-
-          $comment_form = $this->createFormBuilder($comment)
-              ->add('commentaire',TextareaType::class)
-              ->add('validate', SubmitType::class)
-              ->getForm();
-
-              
-              $comment_form->handleRequest($request);
-
-              if ($comment_form->isSubmitted() && $comment_form->isValid()) {
-              //  $comment = $comment_form->getData();
-               $token = $this->get('security.token_storage')->getToken();
-               $user = $token->getUser();
-               $article->getId($id);
-               $comment->setArticle($article);
-               $comment->setUser($user);
-               $em = $this->getDoctrine()->getEntityManager();
-               $em->persist($comment);
-               $em->flush();
-
-
+        $comment_form->handleRequest($request);
+        if ($comment_form->isSubmitted() && $comment_form->isValid()) {
+            //  $comment = $comment_form->getData();
+            $token = $this->get('security.token_storage')->getToken();
+            $user = $token->getUser();
+            $article->getId($id);
+            $comment->setArticle($article);
+            $comment->setUser($user);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($comment);
+            $em->flush();
             return $this->redirectToRoute('single_article', array('id' => $id));
-
-           }
-
-
-
-
-           $em = $this->getDoctrine()->getManager();
-           $comments = $em->getRepository('BlogBundle:Commentaires')->findByArticle($id);
-
+        }
+        $em = $this->getDoctrine()->getManager();
+        $comments = $em->getRepository('BlogBundle:Commentaires')->findByArticle($id);
         return $this->render('BlogBundle:article:single_article.html.twig', array(
             'article' => $article,
             'user' => $user,
             'comment_form' => $comment_form->createView(),
             'comments' => $comments,
-
+          
         ));
     }
 
@@ -151,7 +153,7 @@ class ArticleController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-             if($editForm->get('save')->isClicked()){
+            if($editForm->get('save')->isClicked()){
                 $article->setBrouillon(0);
                 $article->setDateCreation(new \DateTime("now"));
             }
@@ -204,13 +206,11 @@ class ArticleController extends Controller
     private function createDeleteForm(Article $article)
     {
 
-
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('article_delete', array('id' => $article->getId() )))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
     }
 
 

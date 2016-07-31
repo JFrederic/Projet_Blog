@@ -23,6 +23,9 @@ edit_comment:
     path:     /{commentId}/{id}/edit/comment
     defaults: { _controller: BlogBundle:Commentaire:editComments }
 
+delete_comment:
+    path:     /{commentId}/{id}/delete/comment
+    defaults: { _controller: BlogBundle:Commentaire:deleteComments }
 
 like_comment:
     path:     /{commentId}/{id}/like/comment

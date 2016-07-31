@@ -2,11 +2,11 @@
 
 namespace LeBonZafer\BlogBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use LeBonZafer\BlogBundle\Entity\Commentaires;
-use LeBonZafer\BlogBundle\Entity\Likes;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use LeBonZafer\BlogBundle\Entity\Likes;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CommentaireController extends Controller
 {
@@ -15,31 +15,22 @@ class CommentaireController extends Controller
   /* Affichage des commentaires. */
   public function showCommentsAction()
   {
+    $token = $this->get('security.token_storage')->getToken();
+    $user = $token->getUser();
 
-      /* Sécurité qui vérifie si l'utilisateur est un admin du blog */
       $auth_checker = $this->get('security.authorization_checker');
       $isRoleAdmin = $auth_checker->isGranted('ROLE_ADMIN');
 
-
-    /* Affiche tous les commentaires du blog si l'utilisateur est connecté en tant qu'administrateur. */
-
         if($isRoleAdmin){
             $em = $this->getDoctrine()->getManager();
-           $comments = $em->getRepository('BlogBundle:Commentaires')->findAll();
-
+            $comments = $em->getRepository('BlogBundle:Commentaires')->findAll();
         }
 
-    /* Sinon si l'utilisateur est un membre affiche uniquement ses commentaires.*/
       else
       {
 
-    /* Recupère le jeton(id) de l'utilisateur connecté */
-
           $token = $this->get('security.token_storage')->getToken();
           $user = $token->getUser();
-
-   /* Va chercher dans la base les commentaires postés selon l'utilisateur */
-
           $em = $this->getDoctrine()->getManager();
           $comments = $em->getRepository('BlogBundle:Commentaires')->findByUser($user);
 
@@ -47,11 +38,11 @@ class CommentaireController extends Controller
 
         return $this->render('BlogBundle:Commentaire:add_comment.html.twig' , array(
             'comments' => $comments,
+            'user' => $user,
 
         ));
 
   }
-
 
 
   public function editCommentsAction( Request $request , $commentId , $id)
@@ -91,92 +82,102 @@ class CommentaireController extends Controller
 
 
 
-  public function deleteCommentsAction($commentId)
+  public function deleteCommentsAction(Request $request , $commentId , $id)
 
   {
+      $em = $this->getDoctrine()->getManager();
+      $commentaire = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
+      $articles = $em->getRepository('BlogBundle:Article')->find($id);
+
+      $referer = $this->get('request_stack')->getCurrentRequest()->headers->get('referer');
+
 
       $em = $this->getDoctrine()->getManager();
-      $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
-      if (!$comment) {
-        throw $this->createNotFoundException(
-                'Pas de commentaire trouvé pour ' . $commentid
-        );
-      }
+      $em->remove($commentaire);
+      $em->flush();
 
-      $form = $this->createFormBuilder($comment)
-              ->add('delete', 'submit')
-              ->getForm();
+      return $this->redirect($referer);
 
-      $form->handleRequest($request);
+}
 
-      if ($form->isValid()) {
-        $em->remove($comment);
+
+    public function LikeAction($commentId , $id ,Request $request)
+    {
+
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+
+        $referer = $this->get('request_stack')->getCurrentRequest()->headers->get('referer');
+
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('BlogBundle:Article')->find($id);
+        $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
+        $liked = $em->getRepository('BlogBundle:Likes')->findByAime(1);
+
+        $count = $comment->getListelikes();
+
+        if ($liked == false) {
+          $likes = new Likes();
+          $likes->setUtilisateur($user)
+                ->setComment($comment)
+                ->setAime(1);
+          $comment->setListelikes($count + 1);
+          $em->persist($likes);
+        }
+        else {
+          foreach( $liked as $key => $like )
+          {
+
+            if( $like->getComment()->getId() == $comment->getId() && $user->getId() ==  $like->getUtilisateur()->getId() )
+            {
+              if($like->getAime() != 0)
+              {
+                $like->setAime(0);
+                $comment->setListelikes($count - 1);
+              }
+
+            }
+
+            else {
+
+                $likes = new Likes();
+                $likes->setUtilisateur($user)
+                        ->setComment($comment)
+                        ->setAime(1);
+                $comment->setListelikes($count + 1);
+                $em->persist($likes);
+              }
+
+
+
+
+          }
+        }
         $em->flush();
-      }
+        return $this->redirect($referer);
 
-      $build['form'] = $form->createView();
-      return $this->render('FooNewsBundle:Default:news_add.html.twig', $build);
     }
 
+/* Filtre likes */
 
-
-
-
-    public function LikeAction($commentId , $id)
+    public function likePostedAction()
     {
 
       $token = $this->get('security.token_storage')->getToken();
       $user = $token->getUser();
 
+
       $em = $this->getDoctrine()->getManager();
-      $articles = $em->getRepository('BlogBundle:Article')->find($id);
-      $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
+      $ListeCommentaire = $em->getRepository('BlogBundle:Commentaires')->findAll();
 
+      foreach ($ListeCommentaire as $key => $commentaire) {
+        if ($commentaire->getUser()->getId() != $user->getId()) {
+          $likes = $em->getRepository('BlogBundle:Likes')->findAll();
 
-
-
-
-      // if( $user->getId() == $comment->getUser()->getId() )
-      // {
-      //
-      //
-      //   $like = $comment->getListelikes();
-      //
-      //   $em = $this->getDoctrine()->getEntityManager();
-      //   $em->flush();
-      //
-      //
-      // return $this->redirectToRoute('single_article' , array('id' => $id ,  ));
-      //
-      //   }
-        $likes = new Likes();
-        $likes->setUtilisateur($user);
-        $likes->setComment($comment);
-        $likes->setLike(1);
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($likes);
-        $em->flush();
-
-      return $this->redirectToRoute('single_article' , array('id' => $id) );
-
+        }
+      }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

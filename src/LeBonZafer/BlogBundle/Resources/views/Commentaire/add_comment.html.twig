@@ -15,8 +15,9 @@
                     <blockquote>{{comment.user.username}}</blockquote>
                 </div>
                 <div class="card-action ">
-                    <a href="">Supprimer</a>
+                    <a href="/{{comment.id}}/{{ comment.article.id }}/delete/comment">Supprimer</a>
                     <a href="/{{comment.article.id}}/single-article">Voir</a>
+                      <p href="/{{comment.id}}/{{comment.article.id}}/like/comment" style="color:black;" class="secondary-content aime"><i class="fa fa-heart fa-2x"></i> {{comment.listelikes}} <span> {% if comment.listelikes|length > 0  %}  j'aime {% else %} 0 j'aime {% endif %} </span> </p>
                 </div>
             </div>
         </div>

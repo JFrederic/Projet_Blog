@@ -35,11 +35,11 @@ class Likes
 
 
     /**
-     * @var boolean
+     * @var bool
      *
-     * @ORM\Column(name="like", type="boolean")
+     * @ORM\Column(name="aimeAction", type="boolean")
      */
-    private $like;
+    private $aime;
 
 
 
@@ -51,36 +51,14 @@ class Likes
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set like
-     *
-     * @param boolean $like
-     *
-     * @return Likes
-     */
-    public function setLike($like)
-    {
-        $this->like = $like;
 
-        return $this;
-    }
-
-    /**
-     * Get like
-     *
-     * @return boolean
-     */
-    public function getLike()
-    {
-        return $this->like;
-    }
 
     /**
      * Set utilisateur
@@ -128,5 +106,55 @@ class Likes
     public function getComment()
     {
         return $this->comment;
+    }
+
+
+
+    /**
+     * Set likes
+     *
+     * @param integer $likes
+     *
+     * @return Likes
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Get likes
+     *
+     * @return integer
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * Set aime
+     *
+     * @param boolean $aime
+     *
+     * @return Likes
+     */
+    public function setAime($aime)
+    {
+        $this->aime = $aime;
+
+        return $this;
+    }
+
+    /**
+     * Get aime
+     *
+     * @return bool
+     */
+    public function getAime()
+    {
+        return $this->aime;
     }
 }

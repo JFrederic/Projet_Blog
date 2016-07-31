@@ -118,30 +118,18 @@ class User extends BaseUser
     private $imageName;
 
     /**
-<<<<<<< HEAD
      * @ORM\Column(type="datetime", nullable=true)
-=======
-<<<<<<< HEAD
-     * @ORM\Column(type="datetime" , nullable=true)
-=======
-<<<<<<< HEAD
-     * @ORM\Column(type="datetime", nullable=true)
-=======
-     * @ORM\Column(type="datetime")
->>>>>>> master
->>>>>>> 24594c9251457dc28b5127c0009f1992544f05d7
->>>>>>> master
      *
      * @var \DateTime
      */
     private $updatedAt;
-<<<<<<< HEAD
-    
-   
-=======
 
 
->>>>>>> master
+
+
+
+
+
 
 
 
@@ -256,6 +244,7 @@ class User extends BaseUser
      *
      * @return string
      */
+
     public function getSexe()
     {
         return $this->sexe;
@@ -433,8 +422,6 @@ class User extends BaseUser
     {
         return $this->updatedAt;
     }
-<<<<<<< HEAD
-=======
 
     /**
      * Add likedcomment
@@ -470,11 +457,6 @@ class User extends BaseUser
         return $this->likedcomments;
     }
 
-<<<<<<< HEAD
-
-
-
-
     /**
      * Add like
      *
@@ -508,8 +490,5 @@ class User extends BaseUser
     {
         return $this->like;
     }
-=======
-  
->>>>>>> master
->>>>>>> master
+
 }

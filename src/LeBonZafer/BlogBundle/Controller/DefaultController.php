@@ -13,10 +13,11 @@ class DefaultController extends Controller
           $articles = $em->getRepository('BlogBundle:Article')->findByBrouillon(0);
 
 
+
         return $this->render('BlogBundle:Default:index.html.twig' , array(
             'articles' => $articles,
         ));
     }
 
-  
+
 }

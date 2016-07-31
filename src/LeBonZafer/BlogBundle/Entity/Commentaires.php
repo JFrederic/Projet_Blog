@@ -41,11 +41,9 @@ class Commentaires
     private $article;
 
     /**
-     * @ORM\OneToMany(targetEntity="Likes", mappedBy="comment" )
+     * @ORM\OneToMany(targetEntity="Likes", mappedBy="comment" , cascade={"remove"})
      */
    private $like;
-
-
 
     /**
      * @var int

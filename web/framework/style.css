@@ -25,14 +25,14 @@ h1, h2, h3, h4{
 
 nav a{
     font-family: 'Play', cursive;
-    
+
 }
 
 .container{
-    margin-top : 50px; 
+    margin-top : 50px;
 }
 .description{
-    margin-top : 50px; 
+    margin-top : 50px;
 }
 
 .brand-logo.titre {
@@ -49,17 +49,17 @@ footer{
 }
 
 footer a {
-    color : white; 
+    color : white;
 }
 
 .card .card-image .card-title{
     padding : 2px;
-    text-align: center; 
-    width :100%; 
+    text-align: center;
+    width :100%;
 }
 
 table i{
-    margin-right : 20px; 
+    margin-right : 20px;
 }
 
 textarea {
@@ -80,7 +80,7 @@ textarea {
 .separateur {
     border: black 1px solid;
     opacity: 0.2;
-    width : 70%; 
+    width : 70%;
 }
 
 .social  {
@@ -103,6 +103,20 @@ textarea {
 .social p{
   color: white;
 }
+
+.fa-heart {
+  color :red;
+}
+
+.aime {
+  font-size: 12px;
+}
+ .aime span {
+  font-size: 12px;
+  text-transform: lowercase;
+
+}
+
 
 
 
@@ -128,5 +142,3 @@ textarea {
     margin-top: 20px;
     color: white;
 }
-
-

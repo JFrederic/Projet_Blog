@@ -1,7 +1,7 @@
 article_index:
     path:     /
     defaults: { _controller: "BlogBundle:Article:index" }
-    methods:  GET
+    methods:  [GET , DELETE]
 
 article_show:
     path:     /{id}/show
@@ -27,3 +27,9 @@ article_brouillon:
     path:     /brouillon
     defaults: { _controller: "BlogBundle:Article:new"}
     methods:  [GET, POST]
+
+
+article_del:
+    path:     /{id}
+    defaults: { _controller: "BlogBundle:Article:deleteindex"}
+    methods:  [GET , DELETE]
