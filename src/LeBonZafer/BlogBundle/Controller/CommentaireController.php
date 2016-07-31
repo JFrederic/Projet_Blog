@@ -108,15 +108,21 @@ class CommentaireController extends Controller
         $user = $token->getUser();
 
         $referer = $this->get('request_stack')->getCurrentRequest()->headers->get('referer');
-
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository('BlogBundle:Article')->find($id);
         $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
-        $liked = $em->getRepository('BlogBundle:Likes')->findByAime(1);
+        $liked = $em->getRepository('BlogBundle:Likes')->findAll();
 
         $count = $comment->getListelikes();
 
-        if ($liked == false) {
+        foreach ($liked as $key => $like) {
+          if($like->getAime() == 1 && $comment->getId() == $like->getComment()->getId() && $user->getId() == $like->getUtilisateur()->getId())
+          {
+            return $this->redirect($referer);
+          }
+
+        else
+        {
           $likes = new Likes();
           $likes->setUtilisateur($user)
                 ->setComment($comment)
@@ -124,37 +130,12 @@ class CommentaireController extends Controller
           $comment->setListelikes($count + 1);
           $em->persist($likes);
         }
-        else {
-          foreach( $liked as $key => $like )
-          {
-
-            if( $like->getComment()->getId() == $comment->getId() && $user->getId() ==  $like->getUtilisateur()->getId() )
-            {
-              if($like->getAime() != 0)
-              {
-                $like->setAime(0);
-                $comment->setListelikes($count - 1);
-              }
-
-            }
-
-            else {
-
-                $likes = new Likes();
-                $likes->setUtilisateur($user)
-                        ->setComment($comment)
-                        ->setAime(1);
-                $comment->setListelikes($count + 1);
-                $em->persist($likes);
-              }
-
-
-
-
-          }
-        }
+}
         $em->flush();
         return $this->redirect($referer);
+
+
+
 
     }
 
@@ -176,7 +157,6 @@ class CommentaireController extends Controller
 
         }
       }
-
     }
 
 

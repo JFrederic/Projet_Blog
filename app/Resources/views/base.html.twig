@@ -157,7 +157,7 @@
                             <span class="card-title deep-purple lighten-1">{{ article.titre }}</span>
                         </div>
                         <div class="card-content">
-                            <p>{{ article.description[:20]}}</p>
+                            <p>{{ article.description[:100]}}... </p>
                         </div>
                         <div class="card-action">
 
@@ -231,7 +231,7 @@
 
         });
     </script>
-
+    <script src="{{ asset('framework/js/main.js') }}"></script>
 
 
     {% endblock %}
