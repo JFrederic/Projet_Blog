@@ -12,7 +12,7 @@ class CommentaireController extends Controller
 {
 
 
-  /* Affichage des commentaires. */
+  /* Affichage des commentaires.adad */
   public function showCommentsAction()
   {
     $token = $this->get('security.token_storage')->getToken();
