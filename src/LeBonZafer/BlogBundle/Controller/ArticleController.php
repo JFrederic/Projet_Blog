@@ -44,8 +44,8 @@ class ArticleController extends Controller
           $token = $this->get('security.token_storage')->getToken();
           $user = $token->getUser();
             $em = $this->getDoctrine()->getManager();
-            $articles = $em->getRepository('BlogBundle:Article')->findAll();
-            
+            $articles = $em->getRepository('BlogBundle:Article')->findByBrouillon(0);
+
 
             return $this->render('BlogBundle:article:show_all_article.html.twig', array(
               'articles' => $articles,
