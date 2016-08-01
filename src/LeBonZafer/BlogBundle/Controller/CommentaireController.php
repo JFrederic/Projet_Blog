@@ -113,9 +113,14 @@ public function LikeAction($commentId , $id ,Request $request)
 
    $count = $comment->getListelikes();
 
+   $likes = new Likes();
+   $likes->setUtilisateur($user)
+         ->setComment($comment)
+         ->setAime(1);
+   $comment->setListelikes($count + 1);
+   $em->persist($likes);
 
-
-
+ else {
       foreach ($liked as $key => $like) {
         if($like->getAime() == 1 && $comment->getId() == $like->getComment()->getId() && $user->getId() == $like->getUtilisateur()->getId())
         {
@@ -131,13 +136,9 @@ public function LikeAction($commentId , $id ,Request $request)
         $em->persist($likes);
       }
    }
-
+ }
    $em->flush();
    return $this->redirect($referer);
-
 }
-
-
-
 
 }
