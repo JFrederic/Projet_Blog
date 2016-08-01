@@ -11,8 +11,10 @@ class CommentaireController extends Controller
 {
 
 
+<<<<<<< HEAD
 
   /* Affichage des commentaires. */
+
   public function showCommentsAction()
   {
     $token = $this->get('security.token_storage')->getToken();
