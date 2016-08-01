@@ -93,10 +93,10 @@ class User extends BaseUser
      */
    private $like;
 
-
-
-
-
+   /**
+    * @ORM\OneToMany(targetEntity="LikesArticle", mappedBy="likeur" )
+    */
+  private $jaime;
 
 
 
@@ -423,38 +423,40 @@ class User extends BaseUser
         return $this->updatedAt;
     }
 
+
+
     /**
-     * Add likedcomment
+     * Add jaime
      *
-     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment
+     * @param \LeBonZafer\BlogBundle\Entity\LikesArticle $jaime
      *
      * @return User
      */
-    public function addLikedcomment(\LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment)
+    public function addJaime(\LeBonZafer\BlogBundle\Entity\LikesArticle $jaime)
     {
-        $this->likedcomments[] = $likedcomment;
+        $this->jaime[] = $jaime;
 
         return $this;
     }
 
     /**
-     * Remove likedcomment
+     * Remove jaime
      *
-     * @param \LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment
+     * @param \LeBonZafer\BlogBundle\Entity\LikesArticle $jaime
      */
-    public function removeLikedcomment(\LeBonZafer\BlogBundle\Entity\Commentaires $likedcomment)
+    public function removeJaime(\LeBonZafer\BlogBundle\Entity\LikesArticle $jaime)
     {
-        $this->likedcomments->removeElement($likedcomment);
+        $this->jaime->removeElement($jaime);
     }
 
     /**
-     * Get likedcomments
+     * Get jaime
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLikedcomments()
+    public function getJaime()
     {
-        return $this->likedcomments;
+        return $this->jaime;
     }
 
     /**
@@ -490,5 +492,4 @@ class User extends BaseUser
     {
         return $this->like;
     }
-
 }

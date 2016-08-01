@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use LeBonZafer\BlogBundle\Entity\Article;
 use LeBonZafer\BlogBundle\Entity\Commentaires;
 use LeBonZafer\BlogBundle\Entity\Likes;
+use LeBonZafer\BlogBundle\Entity\LikesArticle;
 use LeBonZafer\BlogBundle\Form\ArticleType;
 
 /**
@@ -36,6 +37,22 @@ class ArticleController extends Controller
         ));
 
     }
+
+
+        public function showAllAction()
+        {
+          $token = $this->get('security.token_storage')->getToken();
+          $user = $token->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $articles = $em->getRepository('BlogBundle:Article')->findAll();
+            
+
+            return $this->render('BlogBundle:article:show_all_article.html.twig', array(
+              'articles' => $articles,
+            ));
+        }
+
+
 
     public function deleteindexAction($id) {
 
@@ -92,8 +109,6 @@ class ArticleController extends Controller
     {
         $deleteForm = $this->createDeleteForm($article);
 
-
-
         return $this->render('article/show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
@@ -136,9 +151,10 @@ class ArticleController extends Controller
             'user' => $user,
             'comment_form' => $comment_form->createView(),
             'comments' => $comments,
-          
+
         ));
     }
+
 
 
     /**
@@ -174,6 +190,47 @@ class ArticleController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
+
+    public function LikeArticleAction($id ,  Request $request)
+    {
+
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        $referer = $this->get('request_stack')->getCurrentRequest()->headers->get('referer');
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('BlogBundle:Article')->find($id);
+        $liked = $em->getRepository('BlogBundle:LikesArticle')->findAll();
+
+        $count = $article->getAllLikes();
+
+        $likes = new LikesArticle();
+        $likes->setLikeur($user)
+              ->setArticle($article)
+              ->setAimer(1);
+        $article->setAllLikes($count + 1);
+        $em->persist($likes);
+
+        foreach ($liked as $key => $like)
+        {
+          if($like->getAimer() == 1 && $article->getId() == $like->getArticle()->getId() && $user->getId() == $like->getLikeur()->getId())
+          {
+            return $this->redirect($referer);
+          }
+        else
+        {
+          $likes = new LikesArticle();
+          $likes->setLikeur($user)
+                ->setArticle($article)
+                ->setAimer(1);
+          $article->setAllLikes($count + 1);
+          $em->persist($likes);
+        }
+       }
+        $em->flush();
+        return $this->redirect($referer);
+    }
+
 
     /**
      * Deletes a Article entity.
