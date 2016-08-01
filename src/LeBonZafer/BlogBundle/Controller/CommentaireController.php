@@ -12,9 +12,7 @@ class CommentaireController extends Controller
 
 
 
-
   /* Affichage des commentaires. */
-
   public function showCommentsAction()
   {
     $token = $this->get('security.token_storage')->getToken();
@@ -111,11 +109,23 @@ public function LikeAction($commentId , $id ,Request $request)
    $em = $this->getDoctrine()->getManager();
    $articles = $em->getRepository('BlogBundle:Article')->find($id);
    $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
-   $liked = $em->getRepository('BlogBundle:Likes')->findAll();
+   $liked = $em->getRepository('BlogBundle:Likes')->findByAime(1);
 
    $count = $comment->getListelikes();
 
 
+   if($liked == false)
+   {
+
+
+   $likes = new Likes();
+   $likes->setUtilisateur($user)
+         ->setComment($comment)
+         ->setAime(1);
+   $comment->setListelikes($count + 1);
+   $em->persist($likes);
+ }
+ else {
 
       foreach ($liked as $key => $like) {
         if($like->getAime() == 1 && $comment->getId() == $like->getComment()->getId() && $user->getId() == $like->getUtilisateur()->getId())
@@ -132,54 +142,13 @@ public function LikeAction($commentId , $id ,Request $request)
         $em->persist($likes);
       }
    }
+ }
 
    $em->flush();
    return $this->redirect($referer);
 
 }
 
-/* Filtre likes */
-
-    public function likePostedAction()
-    {
-
-      $token = $this->get('security.token_storage')->getToken();
-      $user = $token->getUser();
-      $referer = $this->get('request_stack')->getCurrentRequest()->headers->get('referer');
-      $em = $this->getDoctrine()->getManager();
-      $likes = $em->getRepository('BlogBundle:Likes')->findByUtilisateur($user);
-
-
-      return $this->render('BlogBundle:Commentaire:like_posted.html.twig' , array( 'user' => $user , 'likes' => $likes ));
-
-
-    }
-
-
-    // public function likeGettedAction()
-    // {
-    //
-    //   $token = $this->get('security.token_storage')->getToken();
-    //   $user = $token->getUser();
-    //   $referer = $this->get('request_stack')->getCurrentRequest()->headers->get('referer');
-    //   $em = $this->getDoctrine()->getManager();
-    //   $likes = $em->getRepository('BlogBundle:Likes')->findAll();
-    //
-    //   foreach ($likes as $key => $like) {
-    //     if($like->getUtilisateur()->getId() != $user->getId())
-    //     {
-    //       return $this->render('BlogBundle:Commentaire:like_getted.html.twig' , array( 'user' => $user , 'likes' => $likes ));
-    //     }
-    //     else {
-    //       return $this->render('BlogBundle:Commentaire:like_getted.html.twig' , array( 'user' => $user , 'likes' => $likes ));
-    //     }
-    //   }
-    //
-    //
-    //
-    //
-    // }
-    //
 
 
 
