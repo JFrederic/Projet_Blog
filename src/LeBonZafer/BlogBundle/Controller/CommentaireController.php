@@ -120,7 +120,7 @@ public function LikeAction($commentId , $id ,Request $request)
    $comment->setListelikes($count + 1);
    $em->persist($likes);
 
- else {
+
       foreach ($liked as $key => $like) {
         if($like->getAime() == 1 && $comment->getId() == $like->getComment()->getId() && $user->getId() == $like->getUtilisateur()->getId())
         {
@@ -136,7 +136,7 @@ public function LikeAction($commentId , $id ,Request $request)
         $em->persist($likes);
       }
    }
- }
+
    $em->flush();
    return $this->redirect($referer);
 }
