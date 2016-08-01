@@ -12,7 +12,7 @@
              <span class="card-title deep-purple lighten-1">{{ article.titre }}</span>
            </div>
             <div class="card-action right-align">
-                <a  href="/{{article.id}}/like/article" class="secondary-content aime"><i  id="like" class="fa fa-heart fa-2x"></i> {{article.allLikes}} <span> {% if article.allLikes|length > 0  %}  j'aime {% else %} 0 j'aime {% endif %} </span> </a>
+              
             </div>
            <div class="card-content">
              <p>{{ article.description|raw|nl2br }}</p>
@@ -22,7 +22,7 @@
            </div>
 
            <div class="card-action right-align">
-            
+
 
            </div>
 

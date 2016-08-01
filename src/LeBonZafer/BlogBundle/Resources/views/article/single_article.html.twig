@@ -71,13 +71,7 @@
         </div>
         <div class="card-action">
 
-          {% if  is_granted('ROLE_ADMIN') or  is_granted('ROLE_MEMBRE') %}
-          <a  href="/{{comment.id}}/{{article.id}}/like/comment" class="secondary-content aime"><i  id="like" class="fa fa-heart fa-2x"></i>  {{comment.listelikes}} <span> {% if comment.listelikes|length > 0  %}  j'aime {% else %} 0 j'aime {% endif %} </span> </a>
-          {% else %}
-          <p style='color:black;' href="/{{comment.id}}/{{article.id}}/like/comment" class="secondary-content aime"><i  id="like" class="fa fa-heart fa-2x"></i>  {{comment.listelikes}} <span> {% if comment.listelikes|length > 0  %}  j'aime {% else %} 0 j'aime {% endif %} </span> </p>
-
-          {% endif %}
-
+        
           {% if is_granted('ROLE_MEMBRE') and is_granted('ROLE_ADMIN') %}
           {% if user.id == comment.user.id %}
               <a href="/{{comment.id}}/{{article.id}}/edit/comment">Editer</a>
