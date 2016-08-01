@@ -111,11 +111,11 @@ public function LikeAction($commentId , $id ,Request $request)
    $em = $this->getDoctrine()->getManager();
    $articles = $em->getRepository('BlogBundle:Article')->find($id);
    $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
-   $liked = $em->getRepository('BlogBundle:Likes')->findByAime(1);
+   $liked = $em->getRepository('BlogBundle:Likes')->findAll();
 
    $count = $comment->getListelikes();
 
-   
+
 
       foreach ($liked as $key => $like) {
         if($like->getAime() == 1 && $comment->getId() == $like->getComment()->getId() && $user->getId() == $like->getUtilisateur()->getId())
