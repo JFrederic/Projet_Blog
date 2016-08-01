@@ -11,7 +11,7 @@ class CommentaireController extends Controller
 {
 
 
-<<<<<<< HEAD
+
 
   /* Affichage des commentaires. */
 
