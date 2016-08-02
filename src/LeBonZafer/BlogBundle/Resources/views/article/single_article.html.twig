@@ -78,7 +78,7 @@
 
           {% endif %}
 
-          {% if is_granted('ROLE_MEMBRE') and is_granted('ROLE_ADMIN') %}
+          {% if  is_granted('ROLE_MEMBRE')  %}
           {% if user.id == comment.user.id %}
               <a href="/{{comment.id}}/{{article.id}}/edit/comment">Editer</a>
               <a href="/{{comment.id}}/{{article.id}}/delete/comment">Supprimer</a>
