@@ -35,6 +35,13 @@ class Commentaires
     private $user;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCreation", type="datetime")
+     */
+    private $dateCreation;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments" )
      * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
@@ -51,6 +58,7 @@ class Commentaires
      * @ORM\Column(name="likes", type="integer" , nullable=true)
      */
     private $listelikes;
+
 
 
 
@@ -165,6 +173,8 @@ class Commentaires
     public function __construct()
     {
         $this->likes = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->dateCreation = new \DateTime("now");
+    
     }
 
     /**
@@ -233,5 +243,29 @@ class Commentaires
     public function getLike()
     {
         return $this->like;
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     *
+     * @return Commentaires
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
     }
 }

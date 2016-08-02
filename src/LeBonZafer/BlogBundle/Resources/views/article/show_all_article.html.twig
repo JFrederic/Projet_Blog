@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+<div class="container">
+     <div class="row">
+       {% for article in articles %}
+         <div class="col s10 offset-s1">
+         <div class="card">
+           <div class="card-image">
+             <img class="responsive-img" src="/images/products/{{ article.imageName }}" style="width:100%;" alt=""/>
+             <span class="card-title deep-purple lighten-1">{{ article.titre }}</span>
+           </div>
+            <div class="card-action right-align">
+              
+            </div>
+           <div class="card-content">
+             <p>{{ article.description|raw|nl2br }}</p>
+           </div>
+           <div class="card-action right-align">
+             <span>{% if article.dateCreation %}Posté le {{ article.dateCreation|date('d-m-Y') }} à {{ article.dateCreation|date('h:m') }}{% endif %}</span>
+           </div>
+
+           <div class="card-action right-align">
+
+
+           </div>
+
+         </div>
+       </div>
+
+
+       {% endfor %}
+     </div>
+
+
+
+{% endblock %}

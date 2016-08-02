@@ -116,7 +116,10 @@ textarea {
   text-transform: lowercase;
 
 }
-
+.time {
+  font-size: 12px;
+  padding-bottom: 30px;
+}
 
 
 

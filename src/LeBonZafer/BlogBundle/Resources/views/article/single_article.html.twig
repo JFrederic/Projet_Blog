@@ -54,7 +54,7 @@
 
   <div class="row">
 
-  <div class="col s12 ">
+  <div class="col s10 offset-s1 ">
 
 
     <div class="card horizontal deep-purple lighten-5 row">
@@ -64,20 +64,20 @@
       <div class="card-stacked col s8 offset-s1">
         <div class="card-content">
          <h5>{{comment.user.username}}</h5>
+         <p class="time">
+           <i class="fa fa-clock-o"></i> {% if article.dateCreation %}Posté le {{ article.dateCreation|date('d-m-Y') }} à {{ article.dateCreation|date('h:m') }}{% endif %}
+         </p>
           <p>{{comment.commentaire|raw|nl2br}}</p>
         </div>
         <div class="card-action">
 
-
-          <a  href="/{{comment.id}}/{{article.id}}/like/comment" class="secondary-content aime"><i  id="like" class="fa fa-heart fa-2x"></i> {{comment.listelikes}} <span> {% if comment.listelikes|length > 0  %}  j'aime {% else %} 0 j'aime {% endif %} </span> </a>
-
-
-
+        
+          {% if is_granted('ROLE_MEMBRE') and is_granted('ROLE_ADMIN') %}
           {% if user.id == comment.user.id %}
               <a href="/{{comment.id}}/{{article.id}}/edit/comment">Editer</a>
               <a href="/{{comment.id}}/{{article.id}}/delete/comment">Supprimer</a>
           {% endif %}
-
+          {% endif %}
         </div>
       </div>
     </div>

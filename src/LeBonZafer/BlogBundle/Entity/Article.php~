@@ -52,16 +52,24 @@ class Article
      */
     private $brouillon;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="article" , cascade={"remove"})
-     */
-    private $admin;
 
     /**
      * @ORM\OneToMany(targetEntity="Commentaires", mappedBy="article" , cascade={"remove"})
      */
     private $comments;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="LikesArticle", mappedBy="article" , cascade={"remove"})
+     */
+   private $like;
+
+   /**
+    * @var int
+    *
+    * @ORM\Column(name="likes", type="integer" , nullable=true)
+    */
+   private $allLikes;
 
 
 
@@ -84,6 +92,13 @@ class Article
      * @ORM\Column(name="imageName", type="string", length=255, nullable=true)
      */
     private $imageName;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
 
 
 
@@ -201,29 +216,7 @@ class Article
         return $this->brouillon;
     }
 
-    /**
-     * Set admin
-     *
-     * @param \LeBonZafer\BlogBundle\Entity\User $admin
-     *
-     * @return Article
-     */
-    public function setAdmin(\LeBonZafer\BlogBundle\Entity\User $admin = null)
-    {
-        $this->admin = $admin;
 
-        return $this;
-    }
-
-    /**
-     * Get admin
-     *
-     * @return \LeBonZafer\BlogBundle\Entity\User
-     */
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
 
     /**
      * Set imageName
@@ -283,6 +276,29 @@ class Article
 
 
 
+    /**
+     * Set allLikes
+     *
+     * @param integer $allLikes
+     *
+     * @return Article
+     */
+    public function setAllLikes($allLikes)
+    {
+        $this->allLikes = $allLikes;
+
+        return $this;
+    }
+
+    /**
+     * Get allLikes
+     *
+     * @return integer
+     */
+    public function getAllLikes()
+    {
+        return $this->allLikes;
+    }
 
     /**
      * Add comment
@@ -316,5 +332,63 @@ class Article
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add like
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\LikesArticle $like
+     *
+     * @return Article
+     */
+    public function addLike(\LeBonZafer\BlogBundle\Entity\LikesArticle $like)
+    {
+        $this->like[] = $like;
+
+        return $this;
+    }
+
+    /**
+     * Remove like
+     *
+     * @param \LeBonZafer\BlogBundle\Entity\LikesArticle $like
+     */
+    public function removeLike(\LeBonZafer\BlogBundle\Entity\LikesArticle $like)
+    {
+        $this->like->removeElement($like);
+    }
+
+    /**
+     * Get like
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLike()
+    {
+        return $this->like;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Article
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

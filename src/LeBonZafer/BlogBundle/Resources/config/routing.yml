@@ -30,3 +30,19 @@ delete_comment:
 like_comment:
     path:     /{commentId}/{id}/like/comment
     defaults: { _controller: BlogBundle:Commentaire:like }
+
+like_article:
+    path:     /{id}/like/article
+    defaults: { _controller: BlogBundle:Article:likeArticle }
+
+like_posted:
+    path:     /like/posted
+    defaults: { _controller: BlogBundle:Commentaire:likePosted }
+
+like_getted:
+    path:     /like/getted
+    defaults: { _controller: BlogBundle:Commentaire:likeGetted }
+
+showAll:
+  path:        /articles
+  defaults:   { _controller: BlogBundle:Article:showAll }

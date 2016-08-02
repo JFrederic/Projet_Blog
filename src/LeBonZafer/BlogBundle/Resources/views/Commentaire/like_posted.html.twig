@@ -1,0 +1,75 @@
+{% extends "::base.html.twig" %}
+{% block title %}Commentaires{% endblock %}
+{% block body %}
+
+    <section class="commentaire">
+
+        <h3 class="deep-purple-text center-align ">Commentaires</h3>
+        <div class="container">
+
+            <div class="row">
+                <div class="col m5 s12">
+                    <div class="card-panel">
+                        <span class="white-text">
+                            <ul>
+                                <li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="{{ path('add_comment')}}" class="collection-item">Tout</a>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    {% if is_granted('ROLE_MEMBRE') %}
+                                        <a href="{{ path('add_comment')}}" class="collection-item">Postés</a>
+                                    {% endif %}
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('like_posted')}}" class="collection-item">J'aime postés</a>
+                                </li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+
+                {% for like in likes %}
+                {% if like.utilisateur.id == user.id %}
+                    <article >
+                            <div style="float:right" class="col m7 s12">
+                                <div class="card deep-purple lighten-5">
+                                    <div class="card-content">
+                                        <span class="card-title deep-purple-text">{{like.comment.article.titre}}</span>
+                                        <p class="time">
+                                          <i class="fa fa-clock-o"></i> {% if like.comment.dateCreation %}Posté le {{ like.comment.dateCreation|date('d-m-Y') }} à {{ like.comment.dateCreation|date('h:m') }}{% endif %}
+                                        </p>
+                                        <p>
+                                            {{like.comment.commentaire|raw|nl2br}}</p>
+                                        <blockquote>{{like.comment.user.username}}</blockquote>
+                                    </div>
+                                    <div class="card-action ">
+                                        {% if user.id == like.comment.user.id %}
+                                            <a href="/{{like.comment.id}}/{{ like.comment.article.id }}/delete/comment">Supprimer</a>
+                                        {% endif %}
+                                        <a href="/{{like.comment.article.id}}/single-article">Voir</a>
+                                        <p href="/{{like.comment.id}}/{{like.comment.article.id}}/like/comment" style="color:black;" class="secondary-content aime">
+                                            <i class="fa fa-heart fa-2x"></i>
+                                            {{like.comment.listelikes}}
+                                            <span>
+                                                {% if like.comment.listelikes | length > 0 %}
+                                                    j'aime
+                                                {% else %}
+                                                    0 j'aime
+                                                {% endif %}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                    </article>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
