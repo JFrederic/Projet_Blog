@@ -109,36 +109,48 @@ public function LikeAction($commentId , $id ,Request $request)
    $em = $this->getDoctrine()->getManager();
    $articles = $em->getRepository('BlogBundle:Article')->find($id);
    $comment = $em->getRepository('BlogBundle:Commentaires')->find($commentId);
-   $liked = $em->getRepository('BlogBundle:Likes')->findByAime(1);
+
+   $liked = $em->getRepository('BlogBundle:Likes')->findAll();
+
 
    $count = $comment->getListelikes();
+   if(!empty($liked)){
+     foreach ($liked as $key => $likes) {
+       if($comment->getId() == $likes->getComment()->getId() && $user->getId() != $likes->getUtilisateur()->getId())
+       {
+            $likes = new Likes();
+            $likes->setUtilisateur($user);
+            $likes->setComment($comment);
+            $likes->setAime(1);
+            $comment->setListeLikes($count + 1 );
+            $em->persist($likes);
 
-   $likes = new Likes();
-   $likes->setUtilisateur($user)
-         ->setComment($comment)
-         ->setAime(1);
-   $comment->setListelikes($count + 1);
-   $em->persist($likes);
+       }
+      else {
 
 
-      foreach ($liked as $key => $like) {
-        if($like->getAime() == 1 && $comment->getId() == $like->getComment()->getId() && $user->getId() == $like->getUtilisateur()->getId())
-        {
           return $this->redirect($referer);
-        }
-      else
-      {
-        $likes = new Likes();
-        $likes->setUtilisateur($user)
-              ->setComment($comment)
-              ->setAime(1);
-        $comment->setListelikes($count + 1);
-        $em->persist($likes);
       }
-   }
 
+
+
+     }
+
+  }
+  else {
+    $like = new Likes();
+    $like->setUtilisateur($user);
+    $like->setComment($comment);
+    $like->setAime(1);
+    $comment->setListeLikes($count + 1 );
+    $em->persist($like);
+
+  }
    $em->flush();
    return $this->redirect($referer);
+
+
+
 }
 
 }
